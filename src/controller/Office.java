@@ -1,8 +1,8 @@
 package controller;
 
 import model.Command;
-import model.Player;
-import model.Room;
+//import model.Player;
+//import model.Room;
 import util.Parser;
 
 /**
@@ -19,8 +19,8 @@ import util.Parser;
 public class Office 
 {
     private Parser parser;
-    private Room startingPlace;
-    private Player player;
+    //private Room startingPlace;
+    //private Player player;
         
     /**
      * The main method: this is what happens first when the program is run.
@@ -46,28 +46,16 @@ public class Office
     private void openForBusiness()
     {
         printWelcome();
+        boolean closed = false;
+        while (!closed) {
+            Command command = parser.getInventoryCommand();
+            closed = processCommand(command);
+        }
+        System.out.println("The office is now closed.");
     }
 
-
-
-    /**
-     *  Main play routine.  Loops until end of play (Player quits or dies).
-     */
-    public void play() 
-    {            
-    	player = new Player(startingPlace);
-        printWelcome();
-
-        // Enter the main command loop.  Here we repeatedly read commands and
-        // execute them until the game is over.
-                
-        boolean finished = false;
-        while (! finished) {
-            Command command = parser.getCommand();
-            finished = processCommand(command);
-        }
-        System.out.println("Your final score was "+player.getScore());
-        System.out.println("Thank you for playing.  Good bye.");
+    private void startOfficeManager(){
+        System.out.println("office manager started");
     }
 
     /**
@@ -91,7 +79,7 @@ public class Office
      */
     private boolean processCommand(Command command) 
     {
-        boolean wantToQuit = false;
+        boolean closeOffice = false;
 
         if(command.isUnknown()) {
             System.out.println("I don't know what you mean...");
@@ -103,30 +91,15 @@ public class Office
         if (commandWord.equals("help")) {
             printHelp();
         }
-        else if (commandWord.equals("go")) {
-            goRoom(command);
-        }
         else if (commandWord.equals("quit")) {
-            wantToQuit = quit(command);
+            closeOffice = quit(command);
         }
-        else if (commandWord.equals("eat")) {
-        	System.out.println(player.eat());
-        }
-        else if (commandWord.equals("get")) {
-        	player.getItem(command);
-            //getItem(command);
-        }
-        else if (commandWord.equals("inventory")) {
-        	player.printInventory();
+        else if (commandWord.equals("add")) {
+            System.out.println(command.getSecondWord());
+        	System.out.println("add machine method needed");
         }
 
-        if(!player.isAlive()) {
-        	System.out.println("You have died");
-        	// set the wantToQuit flag to force the game to end
-        	wantToQuit = true;
-        }
-
-        return wantToQuit;
+        return closeOffice;
     }
 
     // implementations of user commands:
@@ -145,35 +118,6 @@ public class Office
         System.out.println();
         System.out.println("Your command words are:");
         System.out.println("   " + parser.getPrintableCommandWords());
-    }
-
-    /** 
-     * Try to go in one direction. If there is an exit, enter
-     * the new room, otherwise print an error message.
-     */
-    private void goRoom(Command command) 
-    {
-        if(!command.hasSecondWord()) {
-            // if there is no second word, we don't know where to go...
-            System.out.println("Go where?");
-            return;
-        }
-
-        String direction = command.getSecondWord();
-
-        // Try to leave current room.
-        Room nextRoom = player.getCurrentLocation().getExit(direction);
-
-        if (nextRoom == null) {
-            System.out.println("There is no door!");
-        }
-        else {
-            player.setCurrentLocation(nextRoom);
-            player.incrementScore();
-            player.updateHealth(-2);
-            System.out.println("You are " + player);
-            System.out.println();
-        }
     }
 
     /** 
