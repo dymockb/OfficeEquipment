@@ -6,85 +6,49 @@ import model.Room;
 import util.Parser;
 
 /**
- *  This class is the main class of the "World of Zuul" application. 
- *  "World of Zuul" is a very simple, text based adventure game.  Users 
- *  can walk around some scenery. That's all. It should really be extended 
- *  to make it more interesting!
- * 
- *  To play this game, create an instance of this class and call the "play"
- *  method.
- * 
- *  This main class creates and initialises all the others: it creates all
- *  rooms, creates the parser and starts the game.  It also evaluates and
+ *  
+ *  This main class creates and initialises all the others: it creates 
+ *  the office, creates the parser, populates the office with machines
+ *  and starts the Office Manager.  It also evaluates and
  *  executes the commands that the parser returns.
  * 
- * @author  Michael Kolling and David J. Barnes
- * @version 2011.07.31
+ * @author Dymock Brett
+ * @version 1.0
  */
 
-public class OfficeOwner 
+public class Office 
 {
     private Parser parser;
     private Room startingPlace;
     private Player player;
-    
-    
-    
+        
     /**
      * The main method: this is what happens first when the program is run.
-     * This just creates a new Game object, then plays the game.
+     * It creates an Office object, then - with user prompts - adds machines to the Office and
+     * optionally runs the office manager.
      */
     public static void main(String[] args) {
-    	OfficeOwner theGame = new OfficeOwner();
-    	theGame.play();
+    	Office office = new Office();
+    	office.openForBusiness();
     }
         
     /**
      * Create the game and initialise its internal map.
      */
-    public OfficeOwner() 
+    public Office() 
     {
-        createRooms();
         parser = new Parser();
     }
 
     /**
-     * Create all the rooms and link their exits together.
+     * Add machines to the office
      */
-    private void createRooms()
+    private void openForBusiness()
     {
-        Room outside, theater, pub, lab, office;
-      
-        // create the rooms
-        outside = new Room("outside the main entrance of the university");
-        theater = new Room("in a lecture theater");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
-        
-        // initialise room Items
-        theater.setItem("notebook");
-        pub.setItem("drink");
-        lab.setItem("laptop");
-        office.setItem("printer");
-
-        // initialise room exits
-        outside.setExit("east", theater);
-        outside.setExit("south",  lab);
-        outside.setExit("west",  pub);
-        theater.setExit("west",  outside);
-        pub.setExit("east",  outside);
-        lab.setExit("north",  outside);
-        lab.setExit("east", office);
-        office.setExit("west",  lab);
-        
-        // We added a tree to demonstrate the benefits of our refactoring
-        Room tree = new Room("up a tree");
-        outside.setExit("up", tree);
-        tree.setExit("down", outside);
-
-        startingPlace = outside;  // start game outside
+        printWelcome();
     }
+
+
 
     /**
      *  Main play routine.  Loops until end of play (Player quits or dies).
@@ -107,16 +71,15 @@ public class OfficeOwner
     }
 
     /**
-     * Print out the opening message for the player.
+     * Print out the opening message.
      */
     private void printWelcome()
     {
         System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
+        System.out.println("Welcome to your new office.");
+        System.out.println("Let's add some machines to help get the work done.");
+        System.out.println("Choose a machine: PRT or CPY");
         System.out.println("Type 'help' if you need help.");
-        System.out.println();
-        System.out.println("You are " + player);
         System.out.println();
     }
 
