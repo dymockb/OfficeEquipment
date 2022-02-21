@@ -1,9 +1,7 @@
 package model;
 
 /**
- * This class is part of the "World of Zuul" application. 
- * "World of Zuul" is a very simple, text based adventure game.  
- *
+ * 
  * This class holds information about a command that was issued by the user.
  * A command currently consists of two strings: a command word and a second
  * word (for example, if the command was "take map", then the two strings
@@ -15,8 +13,8 @@ package model;
  *
  * If the command had only one word, then the second word is <null>.
  * 
- * @author  Michael Kolling and David J. Barnes
- * @version 2011.07.31
+ * @author  Dymock Brett
+ * @version v1.0
  */
 
 public class Command

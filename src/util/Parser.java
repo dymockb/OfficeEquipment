@@ -19,7 +19,7 @@ import java.util.Scanner;
 public class Parser 
 {
     //private CommandWords commands;  // holds all valid command words
-    private CommandWords inventoryCommands;
+    private CommandWords commandWords;
     private Scanner reader;         // source of command input
 
     /**
@@ -28,7 +28,7 @@ public class Parser
     public Parser() 
     {
         //commands = new CommandWords();
-        inventoryCommands = new CommandWords();
+        commandWords = new CommandWords();
         reader = new Scanner(System.in);
     }
 
@@ -59,7 +59,7 @@ public class Parser
 
         // Now check whether this word is known. If so, create a command
         // with it. If not, create a "null" command (for unknown command).
-        if(inventoryCommands.isCommand(word1)) {
+        if(commandWords.isCommand(word1)) {
             return new Command(word1, word2);
         }
         else {
@@ -109,6 +109,6 @@ public class Parser
      * @return String of valid command words
      */
     public String getPrintableCommandWords() {
-    	return inventoryCommands.getPrintableCommandWords();
+    	return commandWords.getPrintableCommandWords();
     }
 }

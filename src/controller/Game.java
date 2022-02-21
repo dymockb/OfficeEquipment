@@ -99,8 +99,8 @@ public class Game
                 
         boolean finished = false;
         while (! finished) {
-            Command command = parser.getCommand();
-            finished = processCommand(command);
+            //Command command = parser.getCommand();
+            //finished = processCommand(command);
         }
         System.out.println("Your final score was "+player.getScore());
         System.out.println("Thank you for playing.  Good bye.");

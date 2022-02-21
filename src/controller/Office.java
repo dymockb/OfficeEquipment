@@ -1,9 +1,11 @@
 package controller;
 
 import model.Command;
+
 //import model.Player;
 //import model.Room;
 import util.Parser;
+import util.MachineCodes;
 
 /**
  *  
@@ -19,6 +21,7 @@ import util.Parser;
 public class Office 
 {
     private Parser parser;
+    private MachineCodes machineCodes;
     //private Room startingPlace;
     //private Player player;
         
@@ -38,6 +41,7 @@ public class Office
     public Office() 
     {
         parser = new Parser();
+        machineCodes = new MachineCodes();
     }
 
     /**
@@ -54,9 +58,9 @@ public class Office
         System.out.println("The office is now closed.");
     }
 
-    private void startOfficeManager(){
-        System.out.println("office manager started");
-    }
+    //private void startOfficeManager(){
+    //    System.out.println("office manager started");
+    //}
 
     /**
      * Print out the opening message.
@@ -111,13 +115,13 @@ public class Office
      */
     private void printHelp() 
     {
-        System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university - as long as you are healthy.");
-        System.out.println("Your health goes down by 2 when you move to a new location, "); 
-        System.out.println("but it can also be affected by the things you eat.");
+        System.out.println("The office is open for business.");
+        System.out.println("A few types of machine are available:");
+        System.out.println("To add one, type add MACHINE-TYPE. Eg:"); 
+        System.out.println("add PRT");
         System.out.println();
-        System.out.println("Your command words are:");
-        System.out.println("   " + parser.getPrintableCommandWords());
+        System.out.println("The machine types are:");
+        System.out.println("   " + machineCodes.getValidMachines());
     }
 
     /** 
