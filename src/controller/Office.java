@@ -1,6 +1,10 @@
 package controller;
 
+import java.util.ArrayList;
+
 import model.Command;
+import util.OfficeMachine;
+import model.Printer;
 
 //import model.Player;
 //import model.Room;
@@ -22,6 +26,7 @@ public class Office
 {
     private Parser parser;
     private MachineCodes machineCodes;
+    private ArrayList<OfficeMachine> machineInventory;
     //private Room startingPlace;
     //private Player player;
         
@@ -42,6 +47,7 @@ public class Office
     {
         parser = new Parser();
         machineCodes = new MachineCodes();
+        machineInventory = new ArrayList<OfficeMachine>();
     }
 
     /**
@@ -100,7 +106,14 @@ public class Office
         }
         else if (commandWord.equals("add")) {
             System.out.println(command.getSecondWord());
+            if (command.getSecondWord().equals("PRT")){
+                Printer p = new Printer();
+                machineInventory.add(p);
+            }
         	System.out.println("add machine method needed");
+        }
+        else if (commandWord.equals("status")) {
+        	System.out.println("The office currently has " + machineInventory.size() + " machines installed.");
         }
 
         return closeOffice;
