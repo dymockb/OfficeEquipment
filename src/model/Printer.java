@@ -10,8 +10,8 @@ public class Printer extends OfficeMachine {
 	 */
 	public Printer() {
 		super();
-		name = "machineName";
-		machineType = "PRT";
+		machineType = "Printer";
+		machineCode = "PRT";
 	}
 
 	public void processJob(){

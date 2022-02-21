@@ -13,7 +13,7 @@ package util;
 public class MachineCodes
 {
     // a constant array that holds all valid machines
-    private static final String[] validMachineCodes = {
+    private static final String[] machineCodes = {
         "PRT","CPY" 
     };
 
@@ -32,8 +32,8 @@ public class MachineCodes
      */
     public boolean isCommand(String aString)
     {
-        for(int i = 0; i < validMachineCodes.length; i++) {
-            if(validMachineCodes[i].equals(aString))
+        for(int i = 0; i < machineCodes.length; i++) {
+            if(machineCodes[i].equals(aString))
                 return true;
         }
         // if we get here, the string was not found in the commands
@@ -41,14 +41,17 @@ public class MachineCodes
     }
     
     /**
-     * Returns a printable String of all valid command words
-     * @return String of command words
+     * @return an array of all valid machine codes
      */
-    public String getValidMachines() {
-    	String printableWords = "";
-    	for(String word : validMachineCodes) {
-    		printableWords += word + " ";
-    	}
-    	return printableWords;
+    public String[] getMachineCodes() {
+    	return machineCodes;
+    }
+
+    public String printMachineCodes(){
+        String output = "";
+        for(String code : machineCodes){
+            output += code + " ";
+        }
+        return output;
     }
 }

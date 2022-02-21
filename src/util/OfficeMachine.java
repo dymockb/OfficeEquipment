@@ -17,6 +17,7 @@ public abstract class OfficeMachine
      * Doc string 
      */
 
+    protected String machineCode;
     protected String machineType;
     protected int machineNumber;
 
@@ -24,11 +25,15 @@ public abstract class OfficeMachine
 
     }
 
-    public String getMachineType(){
+    public String getCode(){
+        return machineCode;
+    }
+
+    public String getType(){
         return machineType;
     }
 
-    public int getMachineNumber(){
+    public int getNumber(){
         return machineNumber;
     }
 

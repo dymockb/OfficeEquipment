@@ -93,7 +93,6 @@ public class Office
 
         if(command.isUnknown()) {
             System.out.println("I don't know what you mean...");
-            System.out.println("Please type a two-word command.");
             return false;
         }
 
@@ -106,17 +105,40 @@ public class Office
         }
         else if (commandWord.equals("add")) {
             System.out.println(command.getSecondWord());
-            if (command.getSecondWord().equals("PRT")){
-                Printer p = new Printer();
-                machineInventory.add(p);
+            String[] mCodes = machineCodes.getMachineCodes();
+            OfficeMachine newMachine;
+            for (String m : mCodes){
+                if (command.getSecondWord().equals(m)){
+                    newMachine = createMachine(m);
+                    machineInventory.add(newMachine);
+                    System.out.println("A " + newMachine.getType() + " has been installed in the office.");
+                    printInventory();
+                }
             }
-        	System.out.println("add machine method needed");
         }
         else if (commandWord.equals("status")) {
-        	System.out.println("The office currently has " + machineInventory.size() + " machines installed.");
+        	System.out.println("The office currently has " + machineInventory.size() + " machine(s) installed.");
         }
 
         return closeOffice;
+    }
+
+    private OfficeMachine createMachine(String machineCode){
+        if(machineCode.equals("PRT")){
+            Printer p = new Printer();
+            return p;
+        } else {
+            return null; 
+        }
+        
+    }
+
+    private void printInventory(){
+        System.out.print("Current inventory: ");
+        for(OfficeMachine om : machineInventory){
+            System.out.print(om.getType());
+        }
+        System.out.println("");
     }
 
     // implementations of user commands:
@@ -128,13 +150,13 @@ public class Office
      */
     private void printHelp() 
     {
-        System.out.println("The office is open for business.");
+        System.out.println("The office is open for business, but it needs some machines to do some work.");
         System.out.println("A few types of machine are available:");
         System.out.println("To add one, type add MACHINE-TYPE. Eg:"); 
         System.out.println("add PRT");
         System.out.println();
         System.out.println("The machine types are:");
-        System.out.println("   " + machineCodes.getValidMachines());
+        System.out.println("   " + machineCodes.printMachineCodes());
     }
 
     /** 
