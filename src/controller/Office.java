@@ -15,8 +15,9 @@ import util.MachineCodes;
  *  
  *  This main class creates and initialises all the others: it creates 
  *  the office, creates the parser, populates the office with machines
- *  and starts the Office Manager.  It also evaluates and
- *  executes the commands that the parser returns.
+ *  and starts the Office Manager.  
+ * 
+ *  It also evaluates and executes the commands that the parser returns.
  * 
  * @author Dymock Brett
  * @version 1.0
