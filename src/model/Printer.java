@@ -1,16 +1,17 @@
 package model;
 
-import util.OfficeMachine;
+//import model.OfficeMachine;
 
 public class Printer extends OfficeMachine {
 		
 	private String name;
+	private Job job;
 	/**
 	 * Constructor for a Printer
 	 */
 	public Printer() {
 		super();
-		machineType = "Printer";
+		machineDesc = "Printer";
 		machineCode = "PRT";
 	}
 

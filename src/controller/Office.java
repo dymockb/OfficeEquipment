@@ -3,11 +3,10 @@ package controller;
 import java.util.ArrayList;
 
 import model.Command;
-import util.OfficeMachine;
+import model.OfficeMachine;
+import model.OfficeManager;
 import model.Printer;
 
-//import model.Player;
-//import model.Room;
 import util.Parser;
 import util.MachineCodes;
 
@@ -25,11 +24,11 @@ import util.MachineCodes;
 
 public class Office 
 {
+    private OfficeManager officeManager;
+    private ArrayList<OfficeMachine> machineInventory;
     private Parser parser;
     private MachineCodes machineCodes;
-    private ArrayList<OfficeMachine> machineInventory;
-    //private Room startingPlace;
-    //private Player player;
+
         
     /**
      * The main method: this is what happens first when the program is run.
@@ -42,7 +41,7 @@ public class Office
     }
         
     /**
-     * Create the game and initialise its internal map.
+     * Create the office and initialise machine states.
      */
     public Office() 
     {
@@ -105,6 +104,10 @@ public class Office
             closeOffice = quit(command);
         }
         else if (commandWord.equals("add")) {
+            if(command.getSecondWord() == null){
+                System.out.println("Add what?");
+                return closeOffice;
+            }
             System.out.println(command.getSecondWord());
             String[] mCodes = machineCodes.getMachineCodes();
             OfficeMachine newMachine;
@@ -112,13 +115,17 @@ public class Office
                 if (command.getSecondWord().equals(m)){
                     newMachine = createMachine(m);
                     machineInventory.add(newMachine);
-                    System.out.println("A " + newMachine.getType() + " has been installed in the office.");
+                    System.out.println("A " + newMachine.getDesc() + " has been installed in the office.");
                     printInventory();
                 }
             }
         }
         else if (commandWord.equals("status")) {
         	System.out.println("The office currently has " + machineInventory.size() + " machine(s) installed.");
+        }
+        else if (commandWord.equals("start-manager")){
+            officeManager = new OfficeManager(machineInventory);
+            officeManager.start();
         }
 
         return closeOffice;
@@ -137,7 +144,7 @@ public class Office
     private void printInventory(){
         System.out.print("Current inventory: ");
         for(OfficeMachine om : machineInventory){
-            System.out.print(om.getType());
+            System.out.print(om.getDesc());
         }
         System.out.println("");
     }

@@ -20,6 +20,7 @@ public class Parser
 {
     //private CommandWords commands;  // holds all valid command words
     private CommandWords commandWords;
+    private MachineCodes machineCodes;
     private Scanner reader;         // source of command input
 
     /**
@@ -29,11 +30,12 @@ public class Parser
     {
         //commands = new CommandWords();
         commandWords = new CommandWords();
+        machineCodes = new MachineCodes();
         reader = new Scanner(System.in);
     }
 
     /**
-     * @return The next command from the user.
+     * @return The next Job command from the user when setting up the office.
      */
     public Command getInventoryCommand() 
     {
@@ -69,8 +71,8 @@ public class Parser
 
     /**
      * @return The next command from the user.
-     
-    public Command getCommand() 
+     */
+    public Command getJobCommand() 
     {
         String inputLine;   // will hold the full input line
         String word1 = null;
@@ -94,15 +96,17 @@ public class Parser
 
         // Now check whether this word is known. If so, create a command
         // with it. If not, create a "null" command (for unknown command).
-        if(commands.isCommand(word1)) {
+        if(machineCodes.isValidCode(word1)) {
             return new Command(word1, word2);
+        } 
+        else if (word1.equals("stop")){
+            return new Command("stop", word2);
         }
         else {
             return new Command(null, word2); 
         }
     }
-    */    
-    
+
     /**
      * Returns a printable String of valid command words as determined
      * by the CommandWords class

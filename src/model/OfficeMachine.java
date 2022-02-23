@@ -1,4 +1,4 @@
-package util;
+package model;
 
 //import java.util.HashMap;
 
@@ -18,7 +18,7 @@ public abstract class OfficeMachine
      */
 
     protected String machineCode;
-    protected String machineType;
+    protected String machineDesc;
     protected int machineNumber;
 
     public OfficeMachine(){
@@ -29,8 +29,8 @@ public abstract class OfficeMachine
         return machineCode;
     }
 
-    public String getType(){
-        return machineType;
+    public String getDesc(){
+        return machineDesc;
     }
 
     public int getNumber(){

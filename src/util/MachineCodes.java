@@ -30,7 +30,7 @@ public class MachineCodes
      * @return true if a given string is a valid machine code,
      * false if it isn't.
      */
-    public boolean isCommand(String aString)
+    public boolean isValidCode(String aString)
     {
         for(int i = 0; i < machineCodes.length; i++) {
             if(machineCodes[i].equals(aString))
