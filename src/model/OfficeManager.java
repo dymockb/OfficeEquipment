@@ -14,6 +14,7 @@ public class OfficeManager
 
     private Parser parser;
     private ArrayList<OfficeMachine> availableMachines;
+    private ArrayList<String> jobCodes;
     /**
      * 
      * @param 
@@ -41,9 +42,13 @@ public class OfficeManager
         boolean officeManagerRunning = true;
         String jobType = command.getCommandWord();
         if(jobType.equals("PRT")){
+            Job job = new Job("PRT", "owner", "description");
+            System.out.println("new Job");
             for(OfficeMachine om : availableMachines){
+                System.out.println("for om");
                 if(om.getCode().equals(jobType)){
-                    om.processJob();
+                    System.out.println("if getcode");
+                    om.processJob(job);
                 }
             }
         } else if (command.getCommandWord().equals("stop")){

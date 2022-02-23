@@ -20,12 +20,17 @@ public abstract class OfficeMachine
     protected String machineCode;
     protected String machineDesc;
     protected int machineNumber;
+    protected boolean online;
+    protected boolean error;
+    protected Job job;
 
     public OfficeMachine(){
-
+        online = true;
+        error = false;
+        job = null;
     }
 
-    public String getCode(){
+    protected String getCode(){
         return machineCode;
     }
 
@@ -33,12 +38,32 @@ public abstract class OfficeMachine
         return machineDesc;
     }
 
-    public int getNumber(){
+    protected int getNumber(){
         return machineNumber;
     }
 
-    public abstract void processJob();
-    
+    protected boolean isOnline(){
+        return online;
+    }
+
+    protected boolean acceptJob(Job job){
+        //System.out.println(this.job==null);
+        //System.out.println(online==true);
+        //System.out.println(error==false);
+        //System.out.println(job.getCode().equals(machineCode));
+        if(this.job == null && online == true && error == false && job.getCode().equals(machineCode)){
+            return true;
+        } else {
+            return false;
+        }  
+    }
+
+    protected void reset(){
+        error = false;
+    }
+
+    protected abstract void processJob(Job job);
+
     public String toString() {
         return "desc of office machine";
     }

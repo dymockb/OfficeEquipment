@@ -4,8 +4,6 @@ package model;
 
 public class Printer extends OfficeMachine {
 		
-	private String name;
-	private Job job;
 	/**
 	 * Constructor for a Printer
 	 */
@@ -15,28 +13,14 @@ public class Printer extends OfficeMachine {
 		machineCode = "PRT";
 	}
 
-	public void processJob(){
-		System.out.println("Printing");
-	}
-	
-	/**
-	 * Factory method to build an Item object according to
-	 * the CREATION_PROBABILITY. Returns null if chance so determines.
-	 * @return The Item object, or null
-
-	public static Item buildItem() {
-		if(rng.nextDouble() <= CREATION_PROB) {
-			return new Item();
+	public void processJob(Job job){
+		if(acceptJob(job)){
+			this.job = job;
+			System.out.println(job.getDescription());
+			this.job = null;
 		}
-		return null;
-	}
-	 */
 
-	/** 
-	 * @return The machine name
-	 */
-	public String getName() {
-		return name;
 	}
+
 	
 }
