@@ -75,8 +75,6 @@ public class Office
     {
         System.out.println();
         System.out.println("Welcome to your new office.");
-        System.out.println("Let's add some machines to help get the work done.");
-        System.out.println("Choose a machine: PRT or CPY");
         System.out.println("Type 'help' if you need help.");
         System.out.println();
     }
@@ -91,10 +89,7 @@ public class Office
     {
         boolean closeOffice = false;
 
-        if(command.isUnknown()) {
-            System.out.println("I don't know what you mean...");
-            return false;
-        }
+
 
         String commandWord = command.getCommandWord();
         if (commandWord.equals("help")) {
@@ -122,10 +117,15 @@ public class Office
         }
         else if (commandWord.equals("status")) {
         	System.out.println("The office currently has " + machineInventory.size() + " machine(s) installed.");
+            printInventory();
         }
         else if (commandWord.equals("start-manager")){
+            if(machineInventory.size()>0){
             officeManager = new OfficeManager(machineInventory);
             officeManager.start();
+            } else {
+                System.out.println("Please add some machines to the office before starting the manager.");
+            }
         }
 
         return closeOffice;
@@ -158,13 +158,14 @@ public class Office
      */
     private void printHelp() 
     {
-        System.out.println("The office is open for business, but it needs some machines to do some work.");
-        System.out.println("A few types of machine are available:");
-        System.out.println("To add one, type add MACHINE-TYPE. Eg:"); 
-        System.out.println("add PRT");
-        System.out.println();
-        System.out.println("The machine types are:");
-        System.out.println("   " + machineCodes.printMachineCodes());
+        System.out.println("Available commands:");
+        System.out.println(" - add MACHINE: add a machine to the office (e.g add PRT)");
+        System.out.println("                Machine types:");
+        System.out.println("                PRT - printer");
+        System.out.println("                CPY - copier");
+        System.out.println("- status: view current machines installed in the office.");
+        System.out.println("- start-manager: start the office manager");
+        System.out.println("- quit: exit and close the office.");
     }
 
     /** 

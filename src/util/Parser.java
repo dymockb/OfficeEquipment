@@ -72,7 +72,7 @@ public class Parser
     /**
      * @return The next command from the user.
      */
-    public Command getJobCommand() 
+    public Command getManagerCommand(String[] managerCommands) 
     {
         String inputLine;   // will hold the full input line
         String word1 = null;
@@ -96,15 +96,21 @@ public class Parser
 
         // Now check whether this word is known. If so, create a command
         // with it. If not, create a "null" command (for unknown command).
-        if(machineCodes.isValidCode(word1)) {
+        if(checkManagerCommand(word1, managerCommands)) {
             return new Command(word1, word2);
-        } 
-        else if (word1.equals("stop")){
-            return new Command("stop", word2);
-        }
-        else {
+        } else {
             return new Command(null, word2); 
         }
+    }
+
+    public boolean checkManagerCommand(String aString, String[] managerCommands)
+    {
+        for(int i = 0; i < managerCommands.length; i++) {
+            if(managerCommands[i].equals(aString))
+                return true;
+        }
+        // if we get here, the string was not found in the commands
+        return false;
     }
 
     /**

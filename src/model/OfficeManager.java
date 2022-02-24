@@ -1,6 +1,8 @@
 package model;
 
 import java.util.ArrayList;
+
+import util.MachineCodes;
 import util.Parser;
 /**
  * The office manager class handles assignment of jobs to machines in the office.
@@ -14,7 +16,9 @@ public class OfficeManager
 
     private Parser parser;
     private ArrayList<OfficeMachine> availableMachines;
-    private ArrayList<String> jobCodes;
+    private ArrayList<Job> jobQueue;
+    private String[] managerCommands;
+    private MachineCodes machineCodes;
     /**
      * 
      * @param 
@@ -23,24 +27,75 @@ public class OfficeManager
     {
         this.availableMachines = availableMachines;
         parser = new Parser();
+        jobQueue = new ArrayList<Job>();
+        managerCommands = new String[] {"stop", "add-job", "process-jobs", "view-job-queue", "help"};
     }
 
     /**
      * @return 
      */
     public void start(){
-        System.out.println("Office manager started");
+        System.out.println("Office manager started.  Enter help for assistance.");
         boolean officeManagerRunning = true;
         while(officeManagerRunning){
-            Command command = parser.getJobCommand();
+            Command command = parser.getManagerCommand(managerCommands);
             officeManagerRunning = processCommand(command);
         }
-        System.out.println("The Office Manager is now offline");
+        System.out.println("The Office Manager is now offline.  Type 'help' for assistance.");
     }
 
     private boolean processCommand(Command command){
+
+        if(command.isUnknown()) {
+            System.out.println("I don't know what you mean...");
+            return true;
+        }
+
         boolean officeManagerRunning = true;
+        if (command.getCommandWord().equals("stop")){
+            officeManagerRunning = false;
+        } else if (command.getCommandWord().equals("add-job")){
+            System.out.println("Add a job type: PRT, CPY, SCN, VND");
+            boolean addingJobs = true;
+            while(addingJobs){
+                Command jobCommand = parser.getJobCommand();
+                addingJobs = processJobCommand(jobCommand);  
+            }
+            System.out.println("Finished adding jobs");
+        } else if (command.getCommandWord().equals("view-job-queue")){
+            System.out.println("There are " + jobQueue.size() + "jobs in the queue.");
+        } else if (command.getCommandWord().equals("process-jobs")){
+            System.out.println("Loop through jobs");
+        } else if (command.getCommandWord().equals("help")){
+            System.out.println("Available commands:");
+            System.out.println(" - add-job: Add a job to the queue");
+            System.out.println(" - view-job-queue: View jobs currently in queue (not processed)");
+            System.out.println(" - process-jobs: Process all jobs in the queue.");
+            System.out.println(" - help: view this help menu");
+            System.out.println(" - stop: stop the office manager");            
+        }
+
+        return officeManagerRunning;
+    }
+
+    private boolean processJobCommand(Command command){
+
+        if(command.isUnknown()) {
+            System.out.println("I don't know what you mean...");
+            return true;
+        }
+
+        boolean addingJobs = true;
+        
         String jobType = command.getCommandWord();
+        
+        if(machineCodes.isValidCode(jobType)){
+            Job job = new Job("PRT");
+            jobQueue.add(job);
+            return false;
+        }
+
+        /*
         if(jobType.equals("PRT")){
             Job job = new Job("PRT", "owner", "description");
             System.out.println("new Job");
@@ -51,12 +106,11 @@ public class OfficeManager
                     om.processJob(job);
                 }
             }
-        } else if (command.getCommandWord().equals("stop")){
-            System.out.println("om stopped");
-            officeManagerRunning = false;
         }
+        */ 
 
-        return officeManagerRunning;
+        return addingJobs;
     };
+
 }
 

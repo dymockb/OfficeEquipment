@@ -15,10 +15,8 @@ public class Job
 
     /**
      */
-    public Job(String code, String owner, String description)
+    public Job(String code)
     {
-        this.description = description;
-        this.owner = owner;
         this.code = code;
     }
 
