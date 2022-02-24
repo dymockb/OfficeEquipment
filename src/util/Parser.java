@@ -103,6 +103,42 @@ public class Parser
         }
     }
 
+    /**
+     * @return The next command from the user.
+     */
+    public Command getJobCommand() 
+    {
+        String inputLine;   // will hold the full input line
+        String word1 = null;
+        String word2 = null;
+
+        System.out.print("> ");     // print prompt
+
+        inputLine = reader.nextLine();
+
+        // Find up to two words on the line.
+        try (Scanner tokenizer = new Scanner(inputLine)){
+        
+            if(tokenizer.hasNext()) {
+                word1 = tokenizer.next();      // get first word
+                if(tokenizer.hasNext()) {
+                    word2 = tokenizer.next();      // get second word
+                    // note: we just ignore the rest of the input line.
+                }
+            }
+        }
+
+        // Now check whether this word is known. If so, create a command
+        // with it. If not, create a "null" command (for unknown command).
+        if(machineCodes.isValidCode(word1)) {
+            return new Command(word1, word2);
+        } else if (word1.equals("done")){
+            return new Command(word1, word2);
+        } else {
+            return new Command(null, word2); 
+        }
+    }
+
     public boolean checkManagerCommand(String aString, String[] managerCommands)
     {
         for(int i = 0; i < managerCommands.length; i++) {
@@ -111,6 +147,24 @@ public class Parser
         }
         // if we get here, the string was not found in the commands
         return false;
+    }
+
+    public String getJobOwner() 
+    {
+        String inputLine;   // will hold the full input line
+        System.out.println("Who is the owner of the job? (Type name)");
+        System.out.print("> ");     // print prompt
+        inputLine = reader.nextLine();
+        return inputLine;
+    }
+
+    public String getJobDescription() 
+    {
+        String inputLine;   // will hold the full input line
+        System.out.println("Please enter a job description");
+        System.out.print("> ");     // print prompt
+        inputLine = reader.nextLine();
+        return inputLine;
     }
 
     /**

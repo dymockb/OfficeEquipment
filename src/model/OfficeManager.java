@@ -55,15 +55,22 @@ public class OfficeManager
         if (command.getCommandWord().equals("stop")){
             officeManagerRunning = false;
         } else if (command.getCommandWord().equals("add-job")){
-            System.out.println("Add a job type: PRT, CPY, SCN, VND");
             boolean addingJobs = true;
             while(addingJobs){
+                System.out.println("Add a job type:");
+                System.out.println("- Enter: PRT, CPY, SCN, VND");
+                System.out.println("Or enter 'done'");
                 Command jobCommand = parser.getJobCommand();
                 addingJobs = processJobCommand(jobCommand);  
             }
             System.out.println("Finished adding jobs");
         } else if (command.getCommandWord().equals("view-job-queue")){
             System.out.println("There are " + jobQueue.size() + "jobs in the queue.");
+            for(Job j : jobQueue){
+                System.out.println(j.getJobType());
+                System.out.println(j.getJobOwner());
+                System.out.println(j.getJobDescription());
+            }
         } else if (command.getCommandWord().equals("process-jobs")){
             System.out.println("Loop through jobs");
         } else if (command.getCommandWord().equals("help")){
@@ -85,16 +92,15 @@ public class OfficeManager
             return true;
         }
 
-        boolean addingJobs = true;
-        
         String jobType = command.getCommandWord();
         
-        if(machineCodes.isValidCode(jobType)){
-            Job job = new Job("PRT");
-            jobQueue.add(job);
+        if(jobType.equals("done")){
             return false;
+        } else {
+            Job job = Job.createJob(jobType);
+            jobQueue.add(job);
+            return true;
         }
-
         /*
         if(jobType.equals("PRT")){
             Job job = new Job("PRT", "owner", "description");
@@ -109,7 +115,6 @@ public class OfficeManager
         }
         */ 
 
-        return addingJobs;
     };
 
 }

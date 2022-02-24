@@ -1,5 +1,6 @@
 package model;
 
+import util.Parser;
 /** 
  * This class holds information about a job that will be assigned to a machine.
 
@@ -11,25 +12,36 @@ public class Job
 {
     private String description;
     private String owner;
-    private String code;
+    private String jobType;
+    private static Parser parser;
 
     /**
      */
-    public Job(String code)
+    public Job(String jobType, String owner, String description)
     {
-        this.code = code;
+        this.jobType = jobType;
+        this.owner = owner;
+        this.description = description;
     }
 
-    public String getDescription(){
+    public static Job createJob(String jobType){
+        parser = new Parser();
+        String ownerInput = parser.getJobOwner();
+        String descriptionInput = parser.getJobDescription();
+        return new Job(jobType, ownerInput, descriptionInput);
+    }
+
+
+    public String getJobDescription(){
         return description;
     }
 
-    public String getOwner(){
+    public String getJobOwner(){
         return owner;
     }
 
-    public String getCode(){
-        return code;
+    public String getJobType(){
+        return jobType;
     }
 }
 

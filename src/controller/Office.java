@@ -89,8 +89,6 @@ public class Office
     {
         boolean closeOffice = false;
 
-
-
         String commandWord = command.getCommandWord();
         if (commandWord.equals("help")) {
             printHelp();
@@ -103,17 +101,21 @@ public class Office
                 System.out.println("Add what?");
                 return closeOffice;
             }
-            System.out.println(command.getSecondWord());
-            String[] mCodes = machineCodes.getMachineCodes();
-            OfficeMachine newMachine;
-            for (String m : mCodes){
-                if (command.getSecondWord().equals(m)){
-                    newMachine = createMachine(m);
-                    machineInventory.add(newMachine);
-                    System.out.println("A " + newMachine.getDesc() + " has been installed in the office.");
-                    printInventory();
+            if(machineCodes.isValidCode(command.getSecondWord())){
+                String[] mCodes = machineCodes.getMachineCodes();
+                OfficeMachine newMachine;
+                for (String m : mCodes){
+                    if (command.getSecondWord().equals(m)){
+                        newMachine = createMachine(m);
+                        machineInventory.add(newMachine);
+                        System.out.println("A " + newMachine.getDesc() + " has been installed in the office.");
+                        printInventory();
+                    }
                 }
+            } else {
+                System.out.println("That's not a valid type of machine.");
             }
+
         }
         else if (commandWord.equals("status")) {
         	System.out.println("The office currently has " + machineInventory.size() + " machine(s) installed.");

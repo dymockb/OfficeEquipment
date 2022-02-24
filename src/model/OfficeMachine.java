@@ -51,7 +51,7 @@ public abstract class OfficeMachine
         //System.out.println(online==true);
         //System.out.println(error==false);
         //System.out.println(job.getCode().equals(machineCode));
-        if(this.job == null && online == true && error == false && job.getCode().equals(machineCode)){
+        if(this.job == null && online == true && error == false && job.getJobType().equals(machineCode)){
             return true;
         } else {
             return false;

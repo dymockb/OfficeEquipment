@@ -16,7 +16,7 @@ public class Printer extends OfficeMachine {
 	public void processJob(Job job){
 		if(acceptJob(job)){
 			this.job = job;
-			System.out.println(job.getDescription());
+			System.out.println(job.getJobDescription());
 			this.job = null;
 		}
 
