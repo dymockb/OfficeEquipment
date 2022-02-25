@@ -149,13 +149,13 @@ public class Parser
         return false;
     }
 
-    public String getJobOwner() 
+    public int getJobOwner() 
     {
         String inputLine;   // will hold the full input line
-        System.out.println("Who is the owner of the job? (Type name)");
+        System.out.println("Who is the owner of the job? (Type your employee number)");
         System.out.print("> ");     // print prompt
         inputLine = reader.nextLine();
-        return inputLine;
+        return Integer.parseInt(inputLine);
     }
 
     public String getJobDescription() 
@@ -166,6 +166,15 @@ public class Parser
         inputLine = reader.nextLine();
         return inputLine;
     }
+
+    public int getCopierInfo(){
+        String inputLine;
+        System.out.println("Please enter the number of Copies needed.");        
+        System.out.print("> ");     // print prompt
+        inputLine = reader.nextLine();
+        return Integer.parseInt(inputLine);
+    }
+
 
     /**
      * Returns a printable String of valid command words as determined

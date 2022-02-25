@@ -17,6 +17,7 @@ public class OfficeManager
     private ArrayList<OfficeMachine> availableMachines;
     private ArrayList<Job> jobQueue;
     private String[] managerCommands;
+    private ArrayList<Integer> jobCodes;
     /**
      * 
      * @param 
@@ -27,6 +28,7 @@ public class OfficeManager
         parser = new Parser();
         jobQueue = new ArrayList<Job>();
         managerCommands = new String[] {"stop", "add-job", "process-jobs", "queue", "help"};
+        jobCodes = new ArrayList<Integer>();
     }
 
     /**
@@ -70,12 +72,12 @@ public class OfficeManager
                 System.out.println(j.getJobDescription());
             }
         } else if (command.getCommandWord().equals("process-jobs")){
-            System.out.println("Assign jobs");
+            System.out.println("** Assigning jobs...");
             for(Job j : jobQueue){
                 for(OfficeMachine om : availableMachines){
                     if(j.getJobType().equals(om.getType())){
                         if(assignJob(j, om)){
-                            System.out.println("Job " + j.getJobDescription() + " assigned to " + om.getDesc());
+                            System.out.println(" - Job " + j.getJobDescription() + " assigned to " + om.getDesc());
                         }
                         break;
                     } else {
@@ -83,7 +85,7 @@ public class OfficeManager
                     }
                 }
             }
-            System.out.println("Run jobs");
+            System.out.println("** Running jobs...");
             for(OfficeMachine om : availableMachines){
                 om.processJob();
             }
@@ -125,7 +127,9 @@ public class OfficeManager
                 }
             }
             if (machinesAvailable > 0){
+                int jobCode = createJobCode(jobCodes);
                 Job job = Job.createJob(jobType);
+                job.setJobCode(jobCode);
                 jobQueue.add(job);
                 System.out.println("A new " + jobType + " job has been added to the queue.\n");
                 return true;
@@ -134,21 +138,12 @@ public class OfficeManager
                 return true;
             }
         }
-        /*
-        if(jobType.equals("PRT")){
-            Job job = new Job("PRT", "owner", "description");
-            System.out.println("new Job");
-            for(OfficeMachine om : availableMachines){
-                System.out.println("for om");
-                if(om.getCode().equals(jobType)){
-                    System.out.println("if getcode");
-                    om.processJob(job);
-                }
-            }
-        }
-        */ 
+    }
 
-    };
-
+    private int createJobCode(ArrayList<Integer> jobCodes){
+        int newCode = jobCodes.size() + 1;
+        jobCodes.add(newCode);
+        return newCode;
+    }
 }
 

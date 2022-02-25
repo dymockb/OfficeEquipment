@@ -7,12 +7,12 @@ package model;
  * @version v1.0
  */
 
-public class PrinterJob extends Job
+public class StandardJob extends Job
 {
 
     /** Constructor for a printer job
      */
-    public PrinterJob(String jobType, String owner, String description)
+    public StandardJob(String jobType, int owner, String description)
     {
         super();
         this.jobType = jobType;

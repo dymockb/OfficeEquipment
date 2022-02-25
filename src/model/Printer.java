@@ -13,7 +13,8 @@ public class Printer extends OfficeMachine {
 
 	public void processJob(){
 		if(this.job != null){
-			System.out.println(job.getJobDescription());
+			System.out.println("Job " + job.getJobString() + " printing...");
+			System.out.println(" - " + job.getJobDescription());
 			this.job = null;
 		} else {
 			System.out.println("Nothing to print.");

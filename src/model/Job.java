@@ -1,5 +1,6 @@
 package model;
 
+import util.LeadingZeros;
 import util.Parser;
 /** 
  * This class holds information about a job that will be assigned to a machine.
@@ -11,8 +12,9 @@ import util.Parser;
 public abstract class Job
 {
     protected String description;
-    protected String owner;
+    protected int owner;
     protected String jobType;
+    protected int jobCode;
     private static Parser parser;
 
     /**
@@ -24,14 +26,20 @@ public abstract class Job
 
     public static Job createJob(String jobType){   
         parser = new Parser();
-        String ownerInput = parser.getJobOwner();
+        int ownerInput = parser.getJobOwner();
         String descriptionInput = parser.getJobDescription();
-        if(jobType.equals("PRT")){
-            return new PrinterJob(jobType, ownerInput, descriptionInput);
+        if(!jobType.equals("CPY")){
+            return new StandardJob(jobType, ownerInput, descriptionInput);
+        } else if (jobType.equals("CPY")){
+            return new CopierJob(jobType, ownerInput, descriptionInput);
         } else {
             return null;
         }
 
+    }
+
+    public void setJobCode(int code){
+        jobCode = code;
     }
 
 
@@ -39,12 +47,20 @@ public abstract class Job
         return description;
     }
 
-    public String getJobOwner(){
+    public int getJobOwner(){
         return owner;
     }
 
     public String getJobType(){
         return jobType;
+    }
+
+    public int getJobCode(){
+        return jobCode;
+    }
+
+    public String getJobString(){
+        return jobType + LeadingZeros.convertInteger(jobCode);
     }
 }
 
