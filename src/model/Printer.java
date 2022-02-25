@@ -11,11 +11,12 @@ public class Printer extends OfficeMachine {
 		machineType = "PRT";
 	}
 
-	public void processJob(Job job){
-		if(acceptJob(job)){
-			this.job = job;
+	public void processJob(){
+		if(this.job != null){
 			System.out.println(job.getJobDescription());
 			this.job = null;
+		} else {
+			System.out.println("Nothing to print.");
 		}
 
 	}
