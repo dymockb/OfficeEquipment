@@ -1,7 +1,5 @@
 package model;
 
-//import model.OfficeMachine;
-
 public class Printer extends OfficeMachine {
 		
 	/**
@@ -10,7 +8,7 @@ public class Printer extends OfficeMachine {
 	public Printer() {
 		super();
 		machineDesc = "Printer";
-		machineCode = "PRT";
+		machineType = "PRT";
 	}
 
 	public void processJob(Job job){

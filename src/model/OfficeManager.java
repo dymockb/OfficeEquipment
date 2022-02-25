@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-import util.MachineCodes;
 import util.Parser;
 /**
  * The office manager class handles assignment of jobs to machines in the office.
@@ -18,7 +17,6 @@ public class OfficeManager
     private ArrayList<OfficeMachine> availableMachines;
     private ArrayList<Job> jobQueue;
     private String[] managerCommands;
-    private MachineCodes machineCodes;
     /**
      * 
      * @param 
@@ -97,9 +95,21 @@ public class OfficeManager
         if(jobType.equals("done")){
             return false;
         } else {
-            Job job = Job.createJob(jobType);
-            jobQueue.add(job);
-            return true;
+            int machinesAvailable = 0;
+            for(OfficeMachine om : availableMachines){
+                if(om.getType().equals(jobType)){
+                    machinesAvailable++;
+                }
+            }
+            if (machinesAvailable > 0){
+                Job job = Job.createJob(jobType);
+                jobQueue.add(job);
+                System.out.println("A new " + jobType + " job has been added to the queue.\n");
+                return true;
+            } else {
+                System.out.println("The office does not contain any machines able to process that job.");
+                return true;
+            }
         }
         /*
         if(jobType.equals("PRT")){

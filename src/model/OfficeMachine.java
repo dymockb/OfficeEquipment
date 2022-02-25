@@ -17,7 +17,7 @@ public abstract class OfficeMachine
      * Doc string 
      */
 
-    protected String machineCode;
+    protected String machineType;
     protected String machineDesc;
     protected int machineNumber;
     protected boolean online;
@@ -30,8 +30,8 @@ public abstract class OfficeMachine
         job = null;
     }
 
-    protected String getCode(){
-        return machineCode;
+    protected String getType(){
+        return machineType;
     }
 
     public String getDesc(){
@@ -51,7 +51,7 @@ public abstract class OfficeMachine
         //System.out.println(online==true);
         //System.out.println(error==false);
         //System.out.println(job.getCode().equals(machineCode));
-        if(this.job == null && online == true && error == false && job.getJobType().equals(machineCode)){
+        if(this.job == null && online == true && error == false && job.getJobType().equals(machineType)){
             return true;
         } else {
             return false;

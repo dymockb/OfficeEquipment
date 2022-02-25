@@ -8,27 +8,30 @@ import util.Parser;
  * @version v1.0
  */
 
-public class Job
+public abstract class Job
 {
-    private String description;
-    private String owner;
-    private String jobType;
+    protected String description;
+    protected String owner;
+    protected String jobType;
     private static Parser parser;
 
     /**
      */
-    public Job(String jobType, String owner, String description)
+    public Job()
     {
-        this.jobType = jobType;
-        this.owner = owner;
-        this.description = description;
+
     }
 
-    public static Job createJob(String jobType){
+    public static Job createJob(String jobType){   
         parser = new Parser();
         String ownerInput = parser.getJobOwner();
         String descriptionInput = parser.getJobDescription();
-        return new Job(jobType, ownerInput, descriptionInput);
+        if(jobType.equals("PRT")){
+            return new PrinterJob(jobType, ownerInput, descriptionInput);
+        } else {
+            return null;
+        }
+
     }
 
 
