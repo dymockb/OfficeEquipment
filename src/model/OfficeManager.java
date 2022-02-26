@@ -95,10 +95,15 @@ public class OfficeManager
             System.out.println("** Running jobs...");
 
             for(OfficeMachine om : availableMachines){
-
+                System.out.println("machine running: " + om.getMachineString());
                 Job checkJob = om.getJob();
-                System.out.println("check job in machine: " + checkJob.getJobString());
-                System.out.println("class type" + checkJob.getClass());
+                if(checkJob != null){
+                    System.out.println("check job in machine: " + checkJob.getJobString());
+                    System.out.println("class type" + checkJob.getClass());
+                } else {
+                    System.out.println("no job in this machine");
+                }
+
                 //System.out.println("no of copies: " + checkJob.getNoOfCopies());                
                 om.processJob();     
             }
