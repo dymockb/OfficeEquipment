@@ -65,13 +65,13 @@ public class OfficeManager
             System.out.println("Finished adding jobs.  Enter a command:");
             System.out.println(" - process-jobs:  Process the job queue.");
             System.out.println(" - queue:  view the job queue.");
-            System.out.println(" - help: view the help menu.");            
+            System.out.println(" - help: view the help menu.");  
+
         } else if (command.getCommandWord().equals("queue")){
+
             System.out.println("There are " + jobQueue.size() + " jobs in the queue.");
             for(Job j : jobQueue){
-                System.out.println(j.getJobType());
-                System.out.println(j.getJobOwner());
-                System.out.println(j.getJobDescription());
+                System.out.println(" - " + j.getJobString() + ", owner (employee number): " + j.getJobOwner());
             }
         } else if (command.getCommandWord().equals("process-jobs")){
 

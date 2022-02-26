@@ -6,6 +6,7 @@ import model.Command;
 import model.OfficeMachine;
 import model.OfficeManager;
 import model.Printer;
+import model.Copier;
 
 import util.Parser;
 import util.MachineTypes;
@@ -139,6 +140,8 @@ public class Office
     private OfficeMachine createMachine(String machineType){
         if(machineType.equals("PRT")){
             return new Printer();
+        } else if (machineType.equals("CPY")){
+            return new Copier();
         } else {
             System.out.println("Valid machine but no template available.");
             return null; 
@@ -156,9 +159,9 @@ public class Office
         if(machineInventory.size() > 0) {
             System.out.println("Current inventory: ");
             for(OfficeMachine om : machineInventory){
-                System.out.print(" - " + om.getMachineString()  + ": " + om.getDesc());
+                System.out.println(" - " + om.getMachineString()  + ": " + om.getDesc());
             }
-            System.out.println("");
+            //System.out.println("");
         }
     }
 

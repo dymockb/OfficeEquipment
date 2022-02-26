@@ -15,6 +15,10 @@ public class CopierJob extends Job
     private int noOfCopies;
     /** Constructor for a printer job
      */
+    public CopierJob(){
+        super();
+    }
+
     public CopierJob(String jobType, int owner, String description)
     {
         super();
