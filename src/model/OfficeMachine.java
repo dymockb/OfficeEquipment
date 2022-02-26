@@ -52,6 +52,10 @@ public abstract class OfficeMachine
         return machineType + LeadingZeros.convertInteger(machineCode);
     }
 
+    public Job getJob(){
+        return job;
+    }
+
     protected boolean isOnline(){
         return online;
     }
@@ -62,7 +66,9 @@ public abstract class OfficeMachine
         //System.out.println(error==false);
         //System.out.println(job.getCode().equals(machineCode));
         if(this.job == null && online == true && error == false && job.getJobType().equals(machineType)){
+            System.out.println("job accepted, job string is: " + job.getJobString());
             this.job = job;
+
             return true;
         } else {
             return false;
