@@ -57,7 +57,7 @@ public class OfficeManager
         } else if (command.getCommandWord().equals("add-job")){
             boolean addingJobs = true;
             while(addingJobs){
-                System.out.println("Add a job type: ");
+                System.out.println("Add a job to the queue: ");
                 System.out.println("- Enter: PRT, CPY, SCN, VND");
                 System.out.println("- Or enter 'done'");
                 Command jobCommand = parser.getJobCommand();
@@ -77,7 +77,7 @@ public class OfficeManager
                 for(OfficeMachine om : availableMachines){
                     if(j.getJobType().equals(om.getType())){
                         if(assignJob(j, om)){
-                            System.out.println(" - Job " + j.getJobDescription() + " assigned to " + om.getDesc());
+                            System.out.println(" - Job " + j.getJobString() + " assigned to " + om.getDesc());
                         }
                         break;
                     } else {

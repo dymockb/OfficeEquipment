@@ -20,7 +20,7 @@ public class Parser
 {
     //private CommandWords commands;  // holds all valid command words
     private CommandWords commandWords;
-    private MachineCodes machineCodes;
+    private MachineTypes machineCodes;
     private Scanner reader;         // source of command input
 
     /**
@@ -30,7 +30,7 @@ public class Parser
     {
         //commands = new CommandWords();
         commandWords = new CommandWords();
-        machineCodes = new MachineCodes();
+        machineCodes = new MachineTypes();
         reader = new Scanner(System.in);
     }
 

@@ -10,17 +10,17 @@ package util;
  * @version v1.0
  */
 
-public class MachineCodes
+public class MachineTypes
 {
     // a constant array that holds all valid machines
     private static final String[] machineCodes = {
-        "PRT","CPY" 
+        "PRT","CPY","SCN","CFE","VND"  
     };
 
     /**
      * Constructor - initialise the command words.
      */
-    public MachineCodes()
+    public MachineTypes()
     {
         // nothing to do at the moment...
     }
@@ -43,11 +43,11 @@ public class MachineCodes
     /**
      * @return an array of all valid machine codes
      */
-    public String[] getMachineCodes() {
+    public String[] getMachineTypes() {
     	return machineCodes;
     }
 
-    public String printMachineCodes(){
+    public String printMachineTypes(){
         String output = "";
         for(String code : machineCodes){
             output += code + " ";

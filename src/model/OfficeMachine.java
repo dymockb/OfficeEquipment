@@ -1,5 +1,7 @@
 package model;
 
+import util.LeadingZeros;
+
 //import java.util.HashMap;
 
 /**
@@ -19,7 +21,7 @@ public abstract class OfficeMachine
 
     protected String machineType;
     protected String machineDesc;
-    protected int machineNumber;
+    protected int machineCode;
     protected boolean online;
     protected boolean error;
     protected Job job;
@@ -38,8 +40,16 @@ public abstract class OfficeMachine
         return machineDesc;
     }
 
-    protected int getNumber(){
-        return machineNumber;
+    public void setCode(int code){
+        machineCode = code;
+    }
+
+    protected int getCode(){
+        return machineCode;
+    }
+
+    public String getMachineString(){
+        return machineType + LeadingZeros.convertInteger(machineCode);
     }
 
     protected boolean isOnline(){

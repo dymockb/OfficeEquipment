@@ -8,7 +8,7 @@ import model.OfficeManager;
 import model.Printer;
 
 import util.Parser;
-import util.MachineCodes;
+import util.MachineTypes;
 
 /**
  *  
@@ -27,7 +27,8 @@ public class Office
     private OfficeManager officeManager;
     private ArrayList<OfficeMachine> machineInventory;
     private Parser parser;
-    private MachineCodes machineCodes;
+    private MachineTypes machineTypes;
+    private ArrayList<Integer> machineCodes;
 
         
     /**
@@ -46,8 +47,9 @@ public class Office
     public Office() 
     {
         parser = new Parser();
-        machineCodes = new MachineCodes();
+        machineTypes = new MachineTypes();
         machineInventory = new ArrayList<OfficeMachine>();
+        machineCodes = new ArrayList<Integer>();
     }
 
     /**
@@ -101,12 +103,13 @@ public class Office
                 System.out.println("Add what?");
                 return closeOffice;
             }
-            if(machineCodes.isValidCode(command.getSecondWord())){
-                String[] mCodes = machineCodes.getMachineCodes();
+            if(machineTypes.isValidCode(command.getSecondWord())){
+                String[] mCodes = machineTypes.getMachineTypes();
                 OfficeMachine newMachine;
                 for (String m : mCodes){
                     if (command.getSecondWord().equals(m)){
                         newMachine = createMachine(m);
+                        newMachine.setCode(createCode());
                         machineInventory.add(newMachine);
                         System.out.println("A " + newMachine.getDesc() + " has been installed in the office.");
                         printInventory();
@@ -133,22 +136,30 @@ public class Office
         return closeOffice;
     }
 
-    private OfficeMachine createMachine(String machineCode){
-        if(machineCode.equals("PRT")){
-            Printer p = new Printer();
-            return p;
+    private OfficeMachine createMachine(String machineType){
+        if(machineType.equals("PRT")){
+            return new Printer();
         } else {
+            System.out.println("Valid machine but no template available.");
             return null; 
         }
         
     }
 
+    private int createCode(){
+        int newCode = machineCodes.size() + 1;
+        machineCodes.add(newCode);
+        return newCode;
+    }
+
     private void printInventory(){
-        System.out.print("Current inventory: ");
-        for(OfficeMachine om : machineInventory){
-            System.out.print(om.getDesc());
+        if(machineInventory.size() > 0) {
+            System.out.println("Current inventory: ");
+            for(OfficeMachine om : machineInventory){
+                System.out.print(" - " + om.getMachineString()  + ": " + om.getDesc());
+            }
+            System.out.println("");
         }
-        System.out.println("");
     }
 
     // implementations of user commands:
@@ -161,10 +172,13 @@ public class Office
     private void printHelp() 
     {
         System.out.println("Available commands:");
-        System.out.println(" - add MACHINE: add a machine to the office (e.g add PRT)");
+        System.out.println(" - add MACHINE: e.g add PRT)");
         System.out.println("                Machine types:");
         System.out.println("                PRT - printer");
         System.out.println("                CPY - copier");
+        System.out.println("                SCN - scanner");
+        System.out.println("                CFE - coffee machine");
+        System.out.println("                VND - vending machine");
         System.out.println("- status: view current machines installed in the office.");
         System.out.println("- start-manager: start the office manager");
         System.out.println("- quit: exit and close the office.");
