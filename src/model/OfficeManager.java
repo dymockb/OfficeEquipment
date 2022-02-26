@@ -57,7 +57,7 @@ public class OfficeManager
         } else if (command.getCommandWord().equals("add-job")){
             boolean addingJobs = true;
             while(addingJobs){
-                System.out.println("- Enter: PRT, CPY, SCN, VND");
+                System.out.println("- Enter job type: PRT, CPY, SCN, VND");
                 System.out.println("- Or enter 'done'");
                 Command jobCommand = parser.getJobCommand();
                 addingJobs = processJobCommand(jobCommand);  

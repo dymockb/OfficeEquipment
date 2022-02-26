@@ -152,7 +152,7 @@ public class Parser
     public int getJobOwner() 
     {
         String inputLine;   // will hold the full input line
-        System.out.println("Who is the owner of the job? (Type your employee number)");
+        System.out.println("Who is the owner of the job? (Enter 3 digit employee number)");
         System.out.print("> ");     // print prompt
         inputLine = reader.nextLine();
         return Integer.parseInt(inputLine);
