@@ -33,8 +33,10 @@ public abstract class Job
         } else if (jobType.equals("CPY")){
             System.out.println("owner: " + ownerInput);
             System.out.println("jobType: " + jobType);
-            return new CopierJob(jobType, ownerInput, descriptionInput);
+            CopierJob newJob = new CopierJob(jobType, ownerInput, descriptionInput);
+            return newJob;
         } else {
+            System.out.println("no job created.");
             return null;
         }
 

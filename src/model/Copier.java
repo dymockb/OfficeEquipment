@@ -11,19 +11,20 @@ public class Copier extends OfficeMachine {
 		super();
 		machineDesc = "Copier";
 		machineType = "CPY";
-		job = new CopierJob();
+		this.job = new CopierJob();
 	}
 
 	public void processJob(){
-		System.out.println("processJob, getJob:" + getJob().getJobString());
-		if(job != null){
-			System.out.println("Job " + job.getJobString() + " copying...");
-			System.out.println("no of copies " + job.getNoOfCopies());
-			System.out.println("type " + job.getJobType());
-			int noOfCopies = job.getNoOfCopies();
+		System.out.println("processJob, getJob:" + getThisJob().getJobString());
+		System.out.println("class " + getJob().getClass());
+		if(getJob() != null){
+			//CopierJob jobToProcess = getJob();
+			System.out.println("Job " + getJob().getJobString() + " copying...");
+			//System.out.println("no of copies " + getJob().getNoOfCopies());
+			int noOfCopies = getThisJob().getNoOfCopies();
 			int copiesDone = 1;
 			while(copiesDone < noOfCopies){
-				System.out.println("Copy " + copiesDone + " of " + noOfCopies + ":" + job.getJobDescription());	
+				System.out.println("Copy " + copiesDone + " of " + noOfCopies + ":" + getThisJob().getJobDescription());	
 				copiesDone++;
 			}
 			job = null;
@@ -33,9 +34,8 @@ public class Copier extends OfficeMachine {
 
 	}
 
-	public Job getJob(){
-		return job;
+	private CopierJob getThisJob(){
+		return this.job;
 	}
-
 	
 }

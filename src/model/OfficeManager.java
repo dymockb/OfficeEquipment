@@ -82,8 +82,10 @@ public class OfficeManager
                     System.out.println("Machine type: " + om.getType());
                     if(jobQueue.get(j).getJobType().equals(om.getType())){
                         if(assignJob(jobQueue.get(j), om)){
-                            System.out.println(" - Job " + jobQueue.get(j).getJobString() + " assigned to " + om.getMachineString());
-                            jobQueue.remove(j);
+                            System.out.println(" - Job " + jobQueue.get(j).getJobString() + " assigned to machine " + om.getMachineString());
+                            System.out.println(om.getJob().getJobString());
+                            //jobQueue.remove(j);
+                            om.processJob();
                         }
                         break;
                     } else {
@@ -93,7 +95,7 @@ public class OfficeManager
             }
             
             System.out.println("** Running jobs...");
-
+            /*
             for(OfficeMachine om : availableMachines){
                 System.out.println("machine running: " + om.getMachineString());
                 Job checkJob = om.getJob();
@@ -107,6 +109,7 @@ public class OfficeManager
                 //System.out.println("no of copies: " + checkJob.getNoOfCopies());                
                 om.processJob();     
             }
+            */
 
             System.out.println("** Finished processing jobs.");
             System.out.println("Type a command, or 'help':");            

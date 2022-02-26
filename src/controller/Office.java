@@ -92,6 +92,11 @@ public class Office
     {
         boolean closeOffice = false;
 
+        if(command.isUnknown()){
+            System.out.println("Unknown command.");
+            return closeOffice;
+        }
+
         String commandWord = command.getCommandWord();
         if (commandWord.equals("help")) {
             printHelp();

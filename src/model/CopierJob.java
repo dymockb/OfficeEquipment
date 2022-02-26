@@ -21,7 +21,7 @@ public class CopierJob extends Job
 
     public CopierJob(String jobType, int owner, String description)
     {
-        //super();
+        super();
         parser = new Parser();
         this.jobType = jobType;
         this.owner = owner;

@@ -29,7 +29,7 @@ public abstract class OfficeMachine
     public OfficeMachine(){
         online = true;
         error = false;
-        job = null;
+        //job = null;
     }
 
     protected String getType(){
@@ -60,17 +60,17 @@ public abstract class OfficeMachine
         return online;
     }
 
-    protected boolean acceptJob(Job job){
-        //System.out.println(this.job==null);
-        //System.out.println(online==true);
-        //System.out.println(error==false);
-        //System.out.println(job.getCode().equals(machineCode));
-        if(this.job == null && online == true && error == false && job.getJobType().equals(machineType)){
-            System.out.println("job accepted, job string is: " + job.getJobString());
-            this.job = job;
+    protected boolean acceptJob(Job nextJob){
+
+        if(job == null && online == true && error == false && nextJob.getJobType().equals(machineType)){
+            System.out.println("job accepted, job string is: " + nextJob.getJobString());
+            System.out.println("machine accepting: " + getMachineString());
+
+            job = nextJob;
 
             return true;
         } else {
+            System.out.println("job not accepted.");
             return false;
         }  
     }
