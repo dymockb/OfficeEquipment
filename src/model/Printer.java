@@ -22,5 +22,9 @@ public class Printer extends OfficeMachine {
 
 	}
 
+	public void setJob(Job job){
+		this.job = job;
+	}
+
 	
 }

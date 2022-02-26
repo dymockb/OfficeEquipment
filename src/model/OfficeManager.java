@@ -84,7 +84,7 @@ public class OfficeManager
                         if(assignJob(jobQueue.get(j), om)){
                             System.out.println(" - Job " + jobQueue.get(j).getJobString() + " assigned to machine " + om.getMachineString());
                             System.out.println(om.getJob().getJobString());
-                            //jobQueue.remove(j);
+                            jobQueue.remove(j);
                             om.processJob();
                         }
                         break;
