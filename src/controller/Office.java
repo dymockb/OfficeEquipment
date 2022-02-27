@@ -1,4 +1,5 @@
 package controller;
+import java.io.FileNotFoundException;
 
 import java.util.ArrayList;
 
@@ -33,15 +34,17 @@ public class Office
     private Parser parser;
     private MachineTypes machineTypes;
     private ArrayList<Integer> machineCodes;
-
+    private boolean testingOn;
+    private String testFile;
         
     /**
      * The main method: this is what happens first when the program is run.
      * It creates an Office object, then - with user prompts - adds machines to the Office and
      * optionally runs the office manager.
      */
-    public static void main(String[] args) {
-    	Office office = new Office();
+    public static void main(String[] args) throws FileNotFoundException {
+    	//Office office = new Office();
+    	Office office = new Office("OfficeTest.txt");
     	office.openForBusiness();
     }
         
@@ -54,6 +57,17 @@ public class Office
         machineTypes = new MachineTypes();
         machineInventory = new ArrayList<OfficeMachine>();
         machineCodes = new ArrayList<Integer>();
+        testingOn = false;
+    }
+
+    public Office(String testFile) throws FileNotFoundException
+    {
+        this.testFile = testFile;
+        parser = new Parser(this.testFile);
+        machineTypes = new MachineTypes();
+        machineInventory = new ArrayList<OfficeMachine>();
+        machineCodes = new ArrayList<Integer>();
+        testingOn = true;
     }
 
     /**
@@ -69,10 +83,6 @@ public class Office
         }
         System.out.println("The office is now closed.");
     }
-
-    //private void startOfficeManager(){
-    //    System.out.println("office manager started");
-    //}
 
     /**
      * Print out the opening message.
@@ -137,12 +147,23 @@ public class Office
             printInventory();
         }
         else if (commandWord.equals("start-manager")){
+
             if(machineInventory.size()>0){
-            officeManager = new OfficeManager(machineInventory);
-            officeManager.start();
+                if(testingOn){
+                    try {
+                        officeManager = new OfficeManager(machineInventory, "OfficeTestA.txt");
+                    } catch (FileNotFoundException e){
+
+                    }
+                } else {
+                    officeManager = new OfficeManager(machineInventory);
+                }
+
+                officeManager.start();
             } else {
                 System.out.println("Please add some machines to the office before starting the manager.");
             }
+            
         }
 
         return closeOffice;

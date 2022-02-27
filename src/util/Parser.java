@@ -1,6 +1,12 @@
 package util;
+
+import java.io.File;
 import model.Command;
 import java.util.Scanner;
+
+import java.io.FileNotFoundException;
+//import java.io.File;
+//import java.io.FileNotFoundException;
 
 /**
  * This class is part of the "OfficeEquipment" application. 
@@ -28,11 +34,20 @@ public class Parser
      */
     public Parser() 
     {
-        //commands = new CommandWords();
         commandWords = new CommandWords();
         machineCodes = new MachineTypes();
         reader = new Scanner(System.in);
     }
+
+    /** */
+    public Parser(String testFile) throws FileNotFoundException
+    {
+        commandWords = new CommandWords();
+        machineCodes = new MachineTypes();
+        File file= new File(testFile);
+        reader = new Scanner(file);
+    }
+
 
     /**
      * @return The next Job command from the user when setting up the office.
@@ -46,6 +61,7 @@ public class Parser
         System.out.print("> ");     // print prompt
 
         inputLine = reader.nextLine();
+        System.out.println("Input: " + inputLine);
 
         // Find up to two words on the line.
         try (Scanner tokenizer = new Scanner(inputLine)){
@@ -81,6 +97,7 @@ public class Parser
         System.out.print("> ");     // print prompt
 
         inputLine = reader.nextLine();
+        System.out.println("Input: " + inputLine);
 
         // Find up to two words on the line.
         try (Scanner tokenizer = new Scanner(inputLine)){
@@ -115,6 +132,7 @@ public class Parser
         System.out.print("> ");     // print prompt
 
         inputLine = reader.nextLine();
+        System.out.println("Input: " + inputLine);
 
         // Find up to two words on the line.
         try (Scanner tokenizer = new Scanner(inputLine)){
@@ -145,7 +163,6 @@ public class Parser
             if(managerCommands[i].equals(aString))
                 return true;
         }
-        // if we get here, the string was not found in the commands
         return false;
     }
 
@@ -155,6 +172,7 @@ public class Parser
         System.out.println("Who is the owner of the job? (Type your employee number)");
         System.out.print("> ");     // print prompt
         inputLine = reader.nextLine();
+        System.out.println("Input: " + inputLine);
         return Integer.parseInt(inputLine);
     }
 
@@ -164,6 +182,7 @@ public class Parser
         System.out.println("Please enter a job description");
         System.out.print("> ");     // print prompt
         inputLine = reader.nextLine();
+        System.out.println("Input: " + inputLine);
         return inputLine;
     }
 
@@ -172,6 +191,7 @@ public class Parser
         System.out.println("Please enter the number of Copies needed.");        
         System.out.print("> ");     // print prompt
         inputLine = reader.nextLine();
+        System.out.println("Input: " + inputLine);
         return Integer.parseInt(inputLine);
     }
 

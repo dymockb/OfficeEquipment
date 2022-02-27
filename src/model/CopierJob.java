@@ -29,6 +29,17 @@ public class CopierJob extends Job
         setNoOfCopies();
     }
 
+    // test constructor with allowing for no of copies to be set as parameter
+    public CopierJob(String jobType, int owner, String description, int noOfCopies)
+    {
+        super();
+        parser = new Parser();
+        this.jobType = jobType;
+        this.owner = owner;
+        this.description = description;
+        this.noOfCopies = noOfCopies;
+    }
+
     public int getNoOfCopies(){
         return noOfCopies;
     }

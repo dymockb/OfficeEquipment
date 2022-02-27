@@ -9,7 +9,7 @@ public class Copier extends OfficeMachine {
 		super();
 		machineDesc = "Copier";
 		machineType = "CPY";
-		job = new CopierJob();
+		//job = new CopierJob();
 	}
 
 	public void processJob(){
@@ -26,9 +26,9 @@ public class Copier extends OfficeMachine {
 				System.out.println("Copy " + copiesDone + " of " + noOfCopies + ": " + job.getJobDescription());	
 				copiesDone++;
 			}
-			
-			
+		
 			job = null;
+		
 		} else {
 			System.out.println("Nothing to copy.");
 		}

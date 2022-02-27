@@ -52,7 +52,7 @@ public abstract class OfficeMachine
         return machineCode;
     }
 
-    protected Job getJob(){
+    public Job getJob(){
         return job;
     }
 
@@ -84,7 +84,7 @@ public abstract class OfficeMachine
         error = false;
     }
 
-    protected abstract void processJob();
+    public abstract void processJob();
 
     public String toString() {
         return "desc of office machine";

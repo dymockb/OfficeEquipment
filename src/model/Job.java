@@ -1,5 +1,7 @@
 package model;
 
+import java.io.FileNotFoundException;
+
 import util.LeadingZeros;
 import util.Parser;
 /** 
@@ -36,6 +38,24 @@ public abstract class Job
             return null;
         }
 
+    }
+
+    public static Job createTestJob(String jobType, String testFile, Parser parser) throws FileNotFoundException {   
+        //parser = new Parser(testFile);
+        int ownerInput = parser.getJobOwner();
+        String descriptionInput = parser.getJobDescription();
+        if(!jobType.equals("CPY")){
+            return new StandardJob(jobType, ownerInput, descriptionInput);
+        } else if (jobType.equals("CPY")){
+            return new CopierJob(jobType, ownerInput, descriptionInput);
+        } else {
+            return null;
+        }
+
+    }
+
+    public static Job createInvisibleJob(String jobType)  {   
+            return null;
     }
 
     public void setJobType(String type){
