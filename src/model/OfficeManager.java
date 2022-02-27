@@ -78,6 +78,8 @@ public class OfficeManager
             System.out.println("** Assigning jobs...");
             for(int j = 0; j < jobQueue.size(); j++){
                 for(OfficeMachine om : availableMachines){
+                    System.out.println(jobQueue.get(j).getJobType());
+                    System.out.println(om.getType());
                     if(jobQueue.get(j).getJobType().equals(om.getType())){
                         if(assignJob(jobQueue.get(j), om)){
                             System.out.println(" - Job " + jobQueue.get(j).getJobString() + " assigned to " + om.getDesc());

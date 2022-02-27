@@ -26,11 +26,15 @@ public class CopierJob extends Job
         this.jobType = jobType;
         this.owner = owner;
         this.description = description;
-        noOfCopies = parser.getCopierInfo();
+        setNoOfCopies();
     }
 
     public int getNoOfCopies(){
         return noOfCopies;
+    }
+
+    public void setNoOfCopies(){
+        noOfCopies = parser.getCopierInfo(); 
     }
 
 }

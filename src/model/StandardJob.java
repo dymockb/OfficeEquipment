@@ -20,5 +20,9 @@ public class StandardJob extends Job
         this.description = description;
     }
 
+    public int getNoOfCopies(){
+		return 0;
+	}
+
 }
 

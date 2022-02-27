@@ -62,5 +62,7 @@ public abstract class Job
     public String getJobString(){
         return jobType + LeadingZeros.convertInteger(jobCode);
     }
+
+    public abstract int getNoOfCopies();
 }
 
