@@ -59,7 +59,7 @@ public class Office
     /**
      * Add machines to the office
      */
-    private void openForBusiness()
+    public void openForBusiness()
     {
         printWelcome();
         boolean closed = false;
@@ -120,7 +120,8 @@ public class Office
                         newMachine = createMachine(m);
                         if(newMachine != null){
                             newMachine.setCode(createCode());
-                            machineInventory.add(newMachine);
+                            addToInventory(newMachine);
+                            //machineInventory.add(newMachine);
                             System.out.println("A " + newMachine.getDesc() + " has been installed in the office.");
                             printInventory();
                         }
@@ -147,7 +148,15 @@ public class Office
         return closeOffice;
     }
 
-    private OfficeMachine createMachine(String machineType){
+    public void addToInventory(OfficeMachine om){
+        machineInventory.add(om);
+    }
+
+    public ArrayList<OfficeMachine> getInventory(){
+        return machineInventory;
+    }
+
+    public OfficeMachine createMachine(String machineType){
         if (machineType.equals("PRT")){
             return new Printer();
         } else if (machineType.equals("CPY")){

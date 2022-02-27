@@ -29,6 +29,7 @@ public abstract class OfficeMachine
     public OfficeMachine(){
         online = true;
         error = false;
+        job = null;
     }
 
     //public static OfficeMachine blankMachine(){

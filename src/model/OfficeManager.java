@@ -80,29 +80,14 @@ public class OfficeManager
             for(Job j : jobQueue){
                 System.out.println(" - " + j.getJobString() + ", owner (employee number): " + j.getJobOwner());
             }
+
         } else if (command.getCommandWord().equals("process-jobs")){
 
             //boolean processingJobs = true;
             //while(processingJobs){
-                if(jobQueue.size()>0){
-                    for(int j = 0; j < jobQueue.size(); j++){
-                        OfficeMachine om = findNextAvailableMachine(jobQueue.get(j));
-                        om.processJob();
-                        if(om.getType().equals("SCN")){
-                            OfficeMachine printer = findNextAvailableMachine(om.getJob());
-                            if(printer != null){
-                                printer.processJob();
-                            } else {
-                                System.out.println("Can't find a printer to print Scan job.");
-                            }
+    
+                processJobs(jobQueue);
 
-                        }
-                        jobQueue.remove(j);
-                    }
-                } else {
-                    System.out.println("** No jobs in queue.");
-                    //processingJobs = false;
-                }                
             //}
 
             System.out.println("** Finished processing jobs.");
@@ -118,6 +103,29 @@ public class OfficeManager
         }
 
         return officeManagerRunning;
+    }
+
+    public void processJobs(ArrayList<Job> jobQueue){
+        
+        if(jobQueue.size()>0){
+            for(int j = 0; j < jobQueue.size(); j++){
+                OfficeMachine om = findNextAvailableMachine(jobQueue.get(j));
+                om.processJob();
+                if(om.getType().equals("SCN")){
+                    OfficeMachine printer = findNextAvailableMachine(om.getJob());
+                    if(printer != null){
+                        printer.processJob();
+                    } else {
+                        System.out.println("Can't find a printer to print Scan job.");
+                    }
+
+                }
+                jobQueue.remove(j);
+            }
+        } else {
+            System.out.println("** No jobs in queue.");
+            //processingJobs = false;
+        }  
     }
 
     private OfficeMachine findNextAvailableMachine(Job job){
@@ -159,11 +167,13 @@ public class OfficeManager
                 }
             }
             if (machinesAvailable > 0){
-                int jobCode = createJobCode(jobCodes);
                 Job job = Job.createJob(jobType);
+
+                int jobCode = createJobCode(jobCodes);
                 job.setJobCode(jobCode);
-                jobQueue.add(job);
-                System.out.println("* A new " + jobType + " job has been added to the queue. *");
+                
+                addToQueue(job);
+                //jobQueue.add(job);
                 return true;
             } else {
                 System.out.println("The office does not contain any machines able to process that job.");
@@ -172,10 +182,23 @@ public class OfficeManager
         }
     }
 
-    private int createJobCode(ArrayList<Integer> jobCodes){
+    public void addToQueue(Job job){
+        jobQueue.add(job);
+        System.out.println("* A new " + job.getJobType() + " job has been added to the queue. *");
+    }
+
+    public ArrayList<Job> getQueue(){
+        return jobQueue;
+    }
+
+    public int createJobCode(ArrayList<Integer> jobCodes){
         int newCode = jobCodes.size() + 1;
         jobCodes.add(newCode);
         return newCode;
+    }
+
+    public ArrayList<Integer> getJobCodes(){
+        return jobCodes;
     }
 }
 
