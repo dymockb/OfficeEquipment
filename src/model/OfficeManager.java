@@ -75,6 +75,31 @@ public class OfficeManager
             }
         } else if (command.getCommandWord().equals("process-jobs")){
 
+            boolean processingJobs = true;
+            while(processingJobs){
+                if(jobQueue.size()>0){
+                    for(int j = 0; j < jobQueue.size(); j++){
+                        OfficeMachine om = findNextAvailableMachine(jobQueue.get(j));
+                        om.processJob();
+                        if(om.getType().equals("SCN")){
+                            OfficeMachine printer = findNextAvailableMachine(om.getJob());
+                            if(printer != null){
+                                printer.processJob();
+                            } else {
+                                System.out.println("Can't find a printer to print Scan job.");
+                            }
+
+                        }
+                        jobQueue.remove(j);
+                    }
+                } else {
+                    processingJobs = false;
+                }
+
+                
+            }
+
+            /*
             System.out.println("** Assigning jobs...");
             for(int j = 0; j < jobQueue.size(); j++){
                 for(OfficeMachine om : availableMachines){
@@ -86,7 +111,11 @@ public class OfficeManager
                             om.processJob();
                             jobQueue.remove(j);
                             //if machine is a scanner, get job and add it to queue.
-                        } else {
+                            if(om.getType().equals("SCN")){
+                                jobQueue.add(om.getJob());
+                                om.setJobToNull();
+                            }
+                         } else {
                             System.out.println("Failed to assign job.");
                         }
                         break;
@@ -96,11 +125,13 @@ public class OfficeManager
                 }
             }
             
-            //System.out.println("** Running jobs...");
+            
+            System.out.println("** Running jobs...");
 
-            //for(OfficeMachine om : availableMachines){
-            //    om.processJob();
-            //}
+            for(OfficeMachine om : availableMachines){
+                om.processJob();
+            }
+            */
 
             System.out.println("** Finished processing jobs.");
             System.out.println("Type a command, or 'help':");            
@@ -115,6 +146,20 @@ public class OfficeManager
         }
 
         return officeManagerRunning;
+    }
+
+    private OfficeMachine findNextAvailableMachine(Job job){
+        OfficeMachine output = OfficeMachine.blankMachine();
+        for(OfficeMachine om : availableMachines){
+            if(job.getJobType().equals(om.getType())){
+                if(assignJob(job, om)){
+                    output = om;
+                } else {
+                    output = null;
+                }
+            }
+        }
+        return output;
     }
 
 

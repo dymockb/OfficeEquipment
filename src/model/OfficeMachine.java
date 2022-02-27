@@ -29,8 +29,10 @@ public abstract class OfficeMachine
     public OfficeMachine(){
         online = true;
         error = false;
-        //job = new Job();
-        //job = null;
+    }
+
+    public static OfficeMachine blankMachine(){
+        return new BlankMachine();
     }
 
     protected String getType(){
@@ -49,6 +51,15 @@ public abstract class OfficeMachine
         return machineCode;
     }
 
+    protected Job getJob(){
+        return job;
+    }
+
+    protected void setJobToNull(){
+        job = null;
+    }
+
+
     public String getMachineString(){
         return machineType + LeadingZeros.convertInteger(machineCode);
     }
@@ -58,11 +69,8 @@ public abstract class OfficeMachine
     }
 
     protected boolean acceptJob(Job job){
-        //System.out.println(this.job==null);
-        //System.out.println(online==true);
-        //System.out.println(error==false);
-        //System.out.println(job.getCode().equals(machineCode));
-        if(online == true && error == false && job.getJobType().equals(machineType)){
+
+        if(this.job == null && online == true && error == false && job.getJobType().equals(machineType)){
             this.job = job;
             return true;
         } else {
