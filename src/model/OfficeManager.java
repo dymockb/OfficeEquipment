@@ -27,7 +27,7 @@ public class OfficeManager
         this.availableMachines = availableMachines;
         parser = new Parser();
         jobQueue = new ArrayList<Job>();
-        managerCommands = new String[] {"stop", "add-job", "process-jobs", "queue", "help"};
+        managerCommands = new String[] {"stop", "add-jobs", "process-jobs", "queue", "help"};
         jobCodes = new ArrayList<Integer>();
     }
 
@@ -54,10 +54,15 @@ public class OfficeManager
         boolean officeManagerRunning = true;
         if (command.getCommandWord().equals("stop")){
             officeManagerRunning = false;
-        } else if (command.getCommandWord().equals("add-job")){
+        } else if (command.getCommandWord().equals("add-jobs")){
             boolean addingJobs = true;
+            String stringOfMachineTypes = "";
+            for (OfficeMachine om : availableMachines){
+                stringOfMachineTypes += om.getType() + ", ";
+            }
+            String commandsToUse = stringOfMachineTypes.substring(0,stringOfMachineTypes.length()-2);
             while(addingJobs){
-                System.out.println("- Enter: PRT, CPY, SCN, VND");
+                System.out.println("- Enter: " + commandsToUse);
                 System.out.println("- Or enter 'done'");
                 Command jobCommand = parser.getJobCommand();
                 addingJobs = processJobCommand(jobCommand);  
@@ -149,17 +154,18 @@ public class OfficeManager
     }
 
     private OfficeMachine findNextAvailableMachine(Job job){
-        OfficeMachine output = OfficeMachine.blankMachine();
+        //OfficeMachine output = OfficeMachine.blankMachine();
         for(OfficeMachine om : availableMachines){
             if(job.getJobType().equals(om.getType())){
                 if(assignJob(job, om)){
-                    output = om;
+                    return om;
                 } else {
-                    output = null;
+                    continue;
                 }
             }
         }
-        return output;
+        return null;
+        //return output;
     }
 
 

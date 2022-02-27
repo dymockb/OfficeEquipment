@@ -31,9 +31,9 @@ public abstract class OfficeMachine
         error = false;
     }
 
-    public static OfficeMachine blankMachine(){
-        return new BlankMachine();
-    }
+    //public static OfficeMachine blankMachine(){
+    //    return new BlankMachine();
+    //}
 
     protected String getType(){
         return machineType;

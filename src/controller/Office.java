@@ -8,6 +8,7 @@ import model.OfficeManager;
 import model.Printer;
 import model.Copier;
 import model.Scanner;
+import model.CoffeeMachine;
 
 import util.Parser;
 import util.MachineTypes;
@@ -111,10 +112,12 @@ public class Office
                 for (String m : mCodes){
                     if (command.getSecondWord().equals(m)){
                         newMachine = createMachine(m);
-                        newMachine.setCode(createCode());
-                        machineInventory.add(newMachine);
-                        System.out.println("A " + newMachine.getDesc() + " has been installed in the office.");
-                        printInventory();
+                        if(newMachine != null){
+                            newMachine.setCode(createCode());
+                            machineInventory.add(newMachine);
+                            System.out.println("A " + newMachine.getDesc() + " has been installed in the office.");
+                            printInventory();
+                        }
                     }
                 }
             } else {
@@ -145,6 +148,8 @@ public class Office
             return new Copier();
         } else if (machineType.equals("SCN")){
             return new Scanner();
+        } else if (machineType.equals("CFE")){
+            return new CoffeeMachine();
         } else {
             System.out.println("Valid machine but no template available.");
             return null; 
