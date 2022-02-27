@@ -7,6 +7,7 @@ import model.OfficeMachine;
 import model.OfficeManager;
 import model.Printer;
 import model.Copier;
+import model.Scanner;
 
 import util.Parser;
 import util.MachineTypes;
@@ -142,6 +143,8 @@ public class Office
             return new Printer();
         } else if (machineType.equals("CPY")){
             return new Copier();
+        } else if (machineType.equals("SCN")){
+            return new Scanner();
         } else {
             System.out.println("Valid machine but no template available.");
             return null; 

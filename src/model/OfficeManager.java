@@ -83,7 +83,11 @@ public class OfficeManager
                     if(jobQueue.get(j).getJobType().equals(om.getType())){
                         if(assignJob(jobQueue.get(j), om)){
                             System.out.println(" - Job " + jobQueue.get(j).getJobString() + " assigned to " + om.getDesc());
+                            om.processJob();
                             jobQueue.remove(j);
+                            //if machine is a scanner, get job and add it to queue.
+                        } else {
+                            System.out.println("Failed to assign job.");
                         }
                         break;
                     } else {
@@ -92,12 +96,11 @@ public class OfficeManager
                 }
             }
             
-            System.out.println("** Running jobs...");
+            //System.out.println("** Running jobs...");
 
-            for(OfficeMachine om : availableMachines){
-                om.processJob();
-            
-            }
+            //for(OfficeMachine om : availableMachines){
+            //    om.processJob();
+            //}
 
             System.out.println("** Finished processing jobs.");
             System.out.println("Type a command, or 'help':");            
@@ -116,9 +119,7 @@ public class OfficeManager
 
 
     private boolean assignJob(Job job, OfficeMachine machine){
-        boolean success;
-        success = machine.acceptJob(job);
-        return success;
+        return machine.acceptJob(job);
     }
 
     private boolean processJobCommand(Command command){

@@ -38,6 +38,10 @@ public abstract class Job
 
     }
 
+    public void setJobType(String type){
+        jobType = type;
+    }
+
     public void setJobCode(int code){
         jobCode = code;
     }
@@ -49,6 +53,10 @@ public abstract class Job
 
     public int getJobOwner(){
         return owner;
+    }
+
+    public void setJobOwner(int code){
+        owner = code;
     }
 
     public String getJobType(){
