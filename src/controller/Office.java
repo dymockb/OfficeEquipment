@@ -9,6 +9,7 @@ import model.Printer;
 import model.Copier;
 import model.Scanner;
 import model.CoffeeMachine;
+import model.VendingMachine;
 
 import util.Parser;
 import util.MachineTypes;
@@ -94,6 +95,11 @@ public class Office
     {
         boolean closeOffice = false;
 
+        if(command.isUnknown()){
+            System.out.println("Unknown command");
+            return false;
+        }
+
         String commandWord = command.getCommandWord();
         if (commandWord.equals("help")) {
             printHelp();
@@ -142,7 +148,7 @@ public class Office
     }
 
     private OfficeMachine createMachine(String machineType){
-        if(machineType.equals("PRT")){
+        if (machineType.equals("PRT")){
             return new Printer();
         } else if (machineType.equals("CPY")){
             return new Copier();
@@ -150,6 +156,8 @@ public class Office
             return new Scanner();
         } else if (machineType.equals("CFE")){
             return new CoffeeMachine();
+        } else if (machineType.equals("VND")){
+            return new VendingMachine();
         } else {
             System.out.println("Valid machine but no template available.");
             return null; 

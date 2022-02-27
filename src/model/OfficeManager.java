@@ -63,7 +63,9 @@ public class OfficeManager
             String commandsToUse = stringOfMachineTypes.substring(0,stringOfMachineTypes.length()-2);
             while(addingJobs){
                 System.out.println("- Enter: " + commandsToUse);
-                System.out.println("- Or enter 'done'");
+                System.out.println(" (If your job is not available make sure there is \n" + 
+                                   " the right type of machine installed in the office.)");
+                System.out.println("- Or enter 'done' to finish adding jobs.");
                 Command jobCommand = parser.getJobCommand();
                 addingJobs = processJobCommand(jobCommand);  
             }
@@ -80,8 +82,8 @@ public class OfficeManager
             }
         } else if (command.getCommandWord().equals("process-jobs")){
 
-            boolean processingJobs = true;
-            while(processingJobs){
+            //boolean processingJobs = true;
+            //while(processingJobs){
                 if(jobQueue.size()>0){
                     for(int j = 0; j < jobQueue.size(); j++){
                         OfficeMachine om = findNextAvailableMachine(jobQueue.get(j));
@@ -98,45 +100,10 @@ public class OfficeManager
                         jobQueue.remove(j);
                     }
                 } else {
-                    processingJobs = false;
-                }
-
-                
-            }
-
-            /*
-            System.out.println("** Assigning jobs...");
-            for(int j = 0; j < jobQueue.size(); j++){
-                for(OfficeMachine om : availableMachines){
-                    System.out.println(jobQueue.get(j).getJobType());
-                    System.out.println(om.getType());
-                    if(jobQueue.get(j).getJobType().equals(om.getType())){
-                        if(assignJob(jobQueue.get(j), om)){
-                            System.out.println(" - Job " + jobQueue.get(j).getJobString() + " assigned to " + om.getDesc());
-                            om.processJob();
-                            jobQueue.remove(j);
-                            //if machine is a scanner, get job and add it to queue.
-                            if(om.getType().equals("SCN")){
-                                jobQueue.add(om.getJob());
-                                om.setJobToNull();
-                            }
-                         } else {
-                            System.out.println("Failed to assign job.");
-                        }
-                        break;
-                    } else {
-                        System.out.println("Error");
-                    }
-                }
-            }
-            
-            
-            System.out.println("** Running jobs...");
-
-            for(OfficeMachine om : availableMachines){
-                om.processJob();
-            }
-            */
+                    System.out.println("** No jobs in queue.");
+                    //processingJobs = false;
+                }                
+            //}
 
             System.out.println("** Finished processing jobs.");
             System.out.println("Type a command, or 'help':");            
