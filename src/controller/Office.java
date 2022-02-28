@@ -38,7 +38,7 @@ public class Office
     private Parser parser;
     private MachineTypes machineTypes;
     private ArrayList<Integer> machineCodes;
-    private boolean testingOn;
+    //private boolean testingOn;
     private String testFile;
     private Listener listener;    
     /**
@@ -52,11 +52,11 @@ public class Office
 
         /** Run this line to run the office via System input.*/
        
-            //Office office = new Office();
+            Office office = new Office();
     	
         /** Run this line to run the office via the OfficeTest.txt file.*/
 
-            Office office = new Office("OfficeTest.txt");
+            //Office office = new Office("OfficeTest.txt");
     	
 
         office.openForBusiness();
@@ -72,7 +72,7 @@ public class Office
         machineTypes = new MachineTypes();
         machineInventory = new ArrayList<OfficeMachine>();
         machineCodes = new ArrayList<Integer>();
-        testingOn = false;
+        //testingOn = false;
     }
 
     public Office(String testFile) throws FileNotFoundException
@@ -82,7 +82,7 @@ public class Office
         machineTypes = new MachineTypes();
         machineInventory = new ArrayList<OfficeMachine>();
         machineCodes = new ArrayList<Integer>();
-        testingOn = true;
+        //testingOn = true;
     }
 
     /**
@@ -164,12 +164,15 @@ public class Office
         else if (commandWord.equals("start-manager")){
 
             if(machineInventory.size()>0){
+                /*
                 if(testingOn){
                     officeManager = new OfficeManager(machineInventory, parser);
                 } else {
                     officeManager = new OfficeManager(machineInventory);
                 }
+                */
 
+                officeManager = new OfficeManager(machineInventory, parser);
                 listener = new Listener(officeManager);
                 
                 for(OfficeMachine om : machineInventory){

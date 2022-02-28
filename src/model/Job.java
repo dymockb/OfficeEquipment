@@ -25,22 +25,16 @@ public abstract class Job
     }
 
     public static Job createJob(String jobType, Parser parser){   
-        //parser = new Parser();
-        int ownerInput = parser.getJobOwner();
-        String descriptionInput = parser.getJobDescription();
-        if(!jobType.equals("CPY")){
-            return new StandardJob(jobType, ownerInput, descriptionInput);
-        } else if (jobType.equals("CPY")){
-            return new CopierJob(jobType, ownerInput, descriptionInput, parser);
-        } else {
-            return null;
+
+        int ownerInput = -1;
+        boolean gettingOwner = true;
+        while(gettingOwner){
+            ownerInput = parser.getJobOwner();
+            if(ownerInput != -1){
+                gettingOwner = false;
+            }
         }
 
-    }
-
-    public static Job createTestJob(String jobType, Parser parser) {   
-
-        int ownerInput = parser.getJobOwner();
         String descriptionInput = parser.getJobDescription();
         if(!jobType.equals("CPY")){
             return new StandardJob(jobType, ownerInput, descriptionInput);

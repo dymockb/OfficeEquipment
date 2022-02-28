@@ -24,7 +24,7 @@ public class OfficeManager
     /**
      * 
      * @param 
-     */
+     
     public OfficeManager(ArrayList<OfficeMachine> availableMachines)
     {
         this.availableMachines = availableMachines;
@@ -35,6 +35,8 @@ public class OfficeManager
         //testingOn = false;
     }
     
+    */
+
     public OfficeManager(ArrayList<OfficeMachine> availableMachines, Parser parser)
     {
         this.availableMachines = availableMachines;
@@ -77,9 +79,9 @@ public class OfficeManager
             }
             String commandsToUse = stringOfMachineTypes.substring(0,stringOfMachineTypes.length()-2);
             while(addingJobs){
-                System.out.println("Machines available: " + commandsToUse);
-                System.out.println("- Enter one of the available machine/job types:");
+                System.out.println("- Enter one of the available machine/job types.");
                 System.out.println("- or enter 'done' to finish adding jobs.");
+                System.out.println("Machines available: " + commandsToUse);
                 Command jobCommand = parser.getJobCommand();
                 addingJobs = processJobCommand(jobCommand);  
             }
@@ -112,7 +114,7 @@ public class OfficeManager
         
         } else if (command.getCommandWord().equals("help")){
             System.out.println("Available commands:");
-            System.out.println(" - add-job: Add a job to the queue");
+            System.out.println(" - add-jobs: Add a job to the queue");
             System.out.println(" - queue: View jobs currently in queue (not processed)");
             System.out.println(" - process-jobs: Process all jobs in the queue.");
             System.out.println(" - help: view this help menu");

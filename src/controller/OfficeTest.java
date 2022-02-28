@@ -12,10 +12,12 @@ import model.Job;
 import model.Printer;
 import model.StandardJob;
 import model.CopierJob;
+import util.Parser;
 
 public class OfficeTest {
 
     Office office;
+    Parser parser = null;
 
     //a general test using each type of machine /job once
     @Test
@@ -33,7 +35,7 @@ public class OfficeTest {
         office.addToInventory(vendingMachine);
 
         //start the manager with all the machines installed in the office
-        OfficeManager manager = new OfficeManager(office.getInventory());
+        OfficeManager manager = new OfficeManager(office.getInventory(), parser);
         
         //create jobs
         //test that job codes increment with each job.
