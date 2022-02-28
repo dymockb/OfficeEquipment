@@ -175,7 +175,7 @@ public class Parser
         return false;
     }
 
-    public int getJobOwner() 
+    public int getJobOwner () throws NumberFormatException
     {
         String inputLine;   // will hold the full input line
         System.out.println("Who is the owner of the job? (Type an employee number)");
@@ -185,7 +185,8 @@ public class Parser
         int numberToReturn;
         try {
             numberToReturn = Integer.parseInt(inputLine);
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
+            System.out.println(e);
             System.out.println("An employee number is required.");
             numberToReturn = -1;
         }

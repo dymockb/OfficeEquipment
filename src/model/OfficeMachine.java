@@ -26,11 +26,13 @@ public abstract class OfficeMachine implements ListenerInterface
     protected boolean error;
     protected Job job;
     protected Listener listener; 
+    protected String[] notifications;
 
     public OfficeMachine(){
         online = false;
         error = false;
         job = null;
+        notifications = new String[4];
     }
 
     protected String getType(){
@@ -70,11 +72,13 @@ public abstract class OfficeMachine implements ListenerInterface
         
         if(!this.online){
             if(online){
-                notifyListener(getMachineString() + " is now online.");
+                notifications[2] = "is online. ";
+                notifyListener(notifications);
             }
         } else {
             if(!online){
-                notifyListener(getMachineString() + " is now offline.");
+                notifications[2] = "is offline. ";
+                notifyListener(notifications);            
             }
         }
 
@@ -97,6 +101,17 @@ public abstract class OfficeMachine implements ListenerInterface
         error = false;
     }
 
+    public void setNotifications(){
+        notifications[0] = getDesc() + " ";
+        notifications[1] = getMachineString() + " ";
+        if(!error){
+            notifications[3] = "No errors.\n";
+        } else {
+            notifications[3] = " ** ERROR **.\n";
+        }
+
+    }
+
     public abstract void processJob();
 
     public String toString() {
@@ -107,8 +122,8 @@ public abstract class OfficeMachine implements ListenerInterface
         this.listener = listener;
     }
 
-    public void notifyListener(String msg){
-        listener.receiveNotification(msg);
+    public void notifyListener(String[] notifications){
+        listener.receiveNotification(notifications);
     }
 
 }

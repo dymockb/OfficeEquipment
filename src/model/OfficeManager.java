@@ -230,8 +230,10 @@ public class OfficeManager
         return newCode;
     }
 
-    public void showStatus(String msg){
-        System.out.println(msg);
+    public void showStatus(String[] msgs){
+        for(String m : msgs){
+            System.out.print(m);
+        }
     }
 
     public ArrayList<Integer> getJobCodes(){

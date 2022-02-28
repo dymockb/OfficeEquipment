@@ -52,12 +52,11 @@ public class Office
 
         /** Run this line to run the office via System input.*/
        
-            Office office = new Office();
+            //Office office = new Office();
     	
         /** Run this line to run the office via the OfficeTest.txt file.*/
 
-            //Office office = new Office("OfficeTest.txt");
-    	
+            Office office = new Office("OfficeTest.txt");
 
         office.openForBusiness();
     
@@ -82,7 +81,6 @@ public class Office
         machineTypes = new MachineTypes();
         machineInventory = new ArrayList<OfficeMachine>();
         machineCodes = new ArrayList<Integer>();
-        //testingOn = true;
     }
 
     /**
@@ -145,6 +143,7 @@ public class Office
                         newMachine = createMachine(m);
                         if(newMachine != null){
                             newMachine.setCode(createCode());
+                            newMachine.setNotifications();
                             addToInventory(newMachine);
                             //machineInventory.add(newMachine);
                             System.out.println("A " + newMachine.getDesc() + " has been installed in the office.");

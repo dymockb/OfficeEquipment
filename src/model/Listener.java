@@ -10,8 +10,8 @@ public class Listener  {
 		this.manager = manager;
 	}
 
-	public void receiveNotification(String msg){
-		manager.showStatus(msg);
+	public void receiveNotification(String[] msgs){
+		manager.showStatus(msgs);
 	}
 	
 }

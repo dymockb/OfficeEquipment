@@ -11,7 +11,7 @@ public interface ListenerInterface
 {
 
     void registerListener(Listener listener);
-    void notifyListener(String msg);
+    void notifyListener(String[] msgs);
 
 }
 
