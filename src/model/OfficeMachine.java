@@ -111,8 +111,4 @@ public abstract class OfficeMachine implements ListenerInterface
         listener.receiveNotification(msg);
     }
 
-    public void showStatus(){
-
-    }
-
 }

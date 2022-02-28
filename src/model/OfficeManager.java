@@ -103,6 +103,10 @@ public class OfficeManager
 
             processJobs(jobQueue);
 
+            for(OfficeMachine om : availableMachines){
+                om.setOnlineStatus(false);
+            }
+
             System.out.println("** Finished processing jobs.");
             System.out.println("Type a command, or 'help':");            
         
@@ -132,6 +136,7 @@ public class OfficeManager
                     if(printer != null){
                         printer.processJob();
                         om.setJobToNull();
+                        System.out.println(om.getMachineString() + ": scanner reset.");
                     } else {
                         System.out.println("Can't find a printer to print Scan job.");
                     }
@@ -192,11 +197,6 @@ public class OfficeManager
             }
             if (machinesAvailable > 0){
                 Job job = null;
-                //if(testingOn){
-                //    job = Job.createTestJob(jobType, parser); 
-                //} else {
-                //    job = Job.createJob(jobType);
-                //}
 
                 job = Job.createJob(jobType, parser);
 
@@ -228,7 +228,7 @@ public class OfficeManager
         return newCode;
     }
 
-    public void outputNotification(String msg){
+    public void showStatus(String msg){
         System.out.println(msg);
     }
 

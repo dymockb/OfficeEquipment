@@ -11,7 +11,7 @@ public class Listener  {
 	}
 
 	public void receiveNotification(String msg){
-		manager.outputNotification(msg);
+		manager.showStatus(msg);
 	}
 	
 }
