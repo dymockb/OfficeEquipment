@@ -21,8 +21,12 @@ public class StandardJob extends Job
     }
 
     public int getNoOfCopies(){
-		return 0;
+		return -1;
 	}
+
+    public int getTemperature(){
+        return -999;
+    }
 
 }
 

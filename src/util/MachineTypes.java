@@ -14,7 +14,7 @@ public class MachineTypes
 {
     // a constant array that holds all valid machines
     private static final String[] machineCodes = {
-        "PRT","CPY","SCN","CFE","VND"  
+        "PRT","CPY","SCN","CFE","VND","FPR"  
     };
 
     /**

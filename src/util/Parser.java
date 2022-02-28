@@ -182,15 +182,13 @@ public class Parser
         System.out.print("> ");     // print prompt
         inputLine = reader.nextLine();
         printInput(inputLine);
-        int numberToReturn;
+
         try {
-            numberToReturn = Integer.parseInt(inputLine);
+            return Integer.parseInt(inputLine);
         } catch (NumberFormatException e) {
-            System.out.println(e);
             System.out.println("An employee number is required.");
-            numberToReturn = -1;
+            return -1;
         }
-        return numberToReturn;
 
     }
 
@@ -207,6 +205,15 @@ public class Parser
     public int getCopierInfo(){
         String inputLine;
         System.out.println("Please enter the number of Copies needed.");        
+        System.out.print("> ");     // print prompt
+        inputLine = reader.nextLine();
+        printInput(inputLine);
+        return Integer.parseInt(inputLine);
+    }
+
+    public int setTemperature(){
+        String inputLine;
+        System.out.println("Please enter the current Temperature:");        
         System.out.print("> ");     // print prompt
         inputLine = reader.nextLine();
         printInput(inputLine);

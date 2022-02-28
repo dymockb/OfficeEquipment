@@ -47,5 +47,9 @@ public class CopierJob extends Job
         noOfCopies = parser.getCopierInfo(); 
     }
 
+    public int getTemperature(){
+        return -999;
+    }
+
 }
 

@@ -32,7 +32,9 @@ public abstract class OfficeMachine implements ListenerInterface
         online = false;
         error = false;
         job = null;
+        listener = null;
         notifications = new String[4];
+        notifications[2] = "is offline.";
     }
 
     protected String getType(){
@@ -63,26 +65,57 @@ public abstract class OfficeMachine implements ListenerInterface
     public String getMachineString(){
         return machineType + LeadingZeros.convertInteger(machineCode);
     }
+    public String[] getNotifications(){
+        return notifications;
+    }
 
     protected boolean getOnlineStatus(){
         return online;
     }
 
-    protected void setOnlineStatus(boolean online){
+    public void setErrorStatus(boolean isError){
         
-        if(!this.online){
-            if(online){
-                notifications[2] = "is online. ";
-                notifyListener(notifications);
+        if (this.error != isError){
+            if(isError){
+                notifications[3] = "** ERROR **\n";
+            } 
+            
+            if (!isError){
+               notifications[3] = "No errors.\n";
             }
-        } else {
-            if(!online){
-                notifications[2] = "is offline. ";
+
+            try {
                 notifyListener(notifications);            
+            } catch (ListenerException e){
+                System.out.println(e);
             }
         }
 
-        this.online = online;
+        this.error = isError;
+    
+    }
+
+
+
+    public void setOnlineStatus(boolean nowOnline){
+        
+        if (this.online != nowOnline){
+            if(nowOnline){
+                notifications[2] = "is online. ";
+            } 
+            
+            if (!nowOnline){
+               notifications[2] = "is offline. ";
+            }
+
+            try {
+                notifyListener(notifications);            
+            } catch (ListenerException e){
+                System.out.println(e);
+            }
+        }
+
+        this.online = nowOnline;
     
     }
 
@@ -112,7 +145,7 @@ public abstract class OfficeMachine implements ListenerInterface
 
     }
 
-    public abstract void processJob();
+    public abstract void processJob() throws TemperatureException;
 
     public String toString() {
         return "desc of office machine";
@@ -122,8 +155,13 @@ public abstract class OfficeMachine implements ListenerInterface
         this.listener = listener;
     }
 
-    public void notifyListener(String[] notifications){
-        listener.receiveNotification(notifications);
+    public void notifyListener(String[] notifications) throws ListenerException {
+        if (listener != null) {
+            listener.receiveNotification(notifications);
+        } else {
+            throw new ListenerException(getCode());
+        }
+
     }
 
 }

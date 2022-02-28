@@ -13,6 +13,7 @@ import model.Listener;
 
 import model.Printer;
 import model.Copier;
+import model.FoodProcessor;
 import model.Scanner;
 import model.CoffeeMachine;
 import model.VendingMachine;
@@ -71,7 +72,6 @@ public class Office
         machineTypes = new MachineTypes();
         machineInventory = new ArrayList<OfficeMachine>();
         machineCodes = new ArrayList<Integer>();
-        //testingOn = false;
     }
 
     public Office(String testFile) throws FileNotFoundException
@@ -145,7 +145,6 @@ public class Office
                             newMachine.setCode(createCode());
                             newMachine.setNotifications();
                             addToInventory(newMachine);
-                            //machineInventory.add(newMachine);
                             System.out.println("A " + newMachine.getDesc() + " has been installed in the office.");
                             printInventory();
                         }
@@ -163,22 +162,19 @@ public class Office
         else if (commandWord.equals("start-manager")){
 
             if(machineInventory.size()>0){
-                /*
-                if(testingOn){
-                    officeManager = new OfficeManager(machineInventory, parser);
-                } else {
-                    officeManager = new OfficeManager(machineInventory);
-                }
-                */
 
                 officeManager = new OfficeManager(machineInventory, parser);
                 listener = new Listener(officeManager);
                 
-                for(OfficeMachine om : machineInventory){
-                    om.registerListener(listener);                
+                for(int i = 0; i < machineInventory.size(); i ++){
+                    //skip machines to test ListenerException
+                    //if(i > 0){
+                        machineInventory.get(i).registerListener(listener);                
+                    //}
                 }
 
                 officeManager.start();
+
             } else {
                 System.out.println("Please add some machines to the office before starting the manager.");
             }
@@ -207,6 +203,8 @@ public class Office
             return new CoffeeMachine();
         } else if (machineType.equals("VND")){
             return new VendingMachine();
+        } else if (machineType.equals("FPR")){
+            return new FoodProcessor();
         } else {
             System.out.println("Valid machine but no template available.");
             return null; 
@@ -214,7 +212,7 @@ public class Office
         
     }
 
-    private int createCode(){
+    public int createCode(){
         int newCode = machineCodes.size() + 1;
         machineCodes.add(newCode);
         return newCode;
@@ -247,6 +245,7 @@ public class Office
         System.out.println("                SCN - scanner");
         System.out.println("                CFE - coffee machine");
         System.out.println("                VND - vending machine");
+        System.out.println("                FPR - food processor");
         System.out.println("- status: view current machines installed in the office.");
         System.out.println("- start-manager: start the office manager");
         System.out.println("- quit: exit and close the office.");

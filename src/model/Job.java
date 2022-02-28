@@ -15,8 +15,6 @@ public abstract class Job
     protected int owner;
     protected String jobType;
     protected int jobCode;
-    //private static Parser parser;
-
     /**
      */
     public Job()
@@ -36,12 +34,15 @@ public abstract class Job
         }
 
         String descriptionInput = parser.getJobDescription();
-        if(!jobType.equals("CPY")){
-            return new StandardJob(jobType, ownerInput, descriptionInput);
-        } else if (jobType.equals("CPY")){
+
+        System.out.println("job type:" + jobType);
+
+        if (jobType.equals("CPY")){
             return new CopierJob(jobType, ownerInput, descriptionInput, parser);
+        } else if (jobType.equals("FPR")){
+            return new FoodProcessorJob(jobType, ownerInput, descriptionInput, parser);
         } else {
-            return null;
+            return new StandardJob(jobType, ownerInput, descriptionInput);
         }
 
     }
@@ -80,5 +81,7 @@ public abstract class Job
     }
 
     public abstract int getNoOfCopies();
+
+    public abstract int getTemperature();
 }
 

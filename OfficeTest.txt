@@ -3,6 +3,7 @@ add SCN
 add CPY
 add CFE
 add VND
+add FPR
 start-manager
 add-jobs
 PRT
@@ -27,12 +28,10 @@ coffee2
 VND
 123
 vend2
-SCN
+FPR
 123
-scan2
-PRT
-123
-print2
+process1
+3
 done
 queue
 process-jobs

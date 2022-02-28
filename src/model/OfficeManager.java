@@ -131,12 +131,23 @@ public class OfficeManager
             for(int j = 0; j < jobQueue.size(); j++){
 
                 OfficeMachine om = findNextAvailableMachine(jobQueue.get(j));
-                
-                om.processJob();
+
+                try {
+                    om.processJob();
+                } catch (TemperatureException e){
+                    System.out.println(e);
+                    //throw new RuntimeException(e);
+                }
+
                 if(om.getType().equals("SCN")){
                     OfficeMachine printer = findNextAvailableMachine(om.getJob());
                     if(printer != null){
-                        printer.processJob();
+                        try {
+                            om.processJob();
+                        } catch (TemperatureException e){
+                            System.out.println(e);
+                        }
+
                         om.setJobToNull();
                         System.out.println(om.getMachineString() + ": scanner reset.");
                     } else {
