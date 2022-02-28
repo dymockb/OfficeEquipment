@@ -7,11 +7,12 @@ package model;
  * @version v1.0
  */
 
-public interface Copies
+public interface ListenerInterface
 {
 
-    int getNoOfCopies();
-    void setNoOfCopies();
+    void registerListener(Listener listener);
+    void notifyListener(String msg);
+    void showStatus();
 
 }
 

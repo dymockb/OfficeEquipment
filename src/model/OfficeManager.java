@@ -97,6 +97,10 @@ public class OfficeManager
 
             System.out.println("** Processing jobs...");
 
+            for(OfficeMachine om : availableMachines){
+                om.setOnlineStatus(true);
+            }
+
             processJobs(jobQueue);
 
             System.out.println("** Finished processing jobs.");
@@ -222,6 +226,10 @@ public class OfficeManager
         int newCode = jobCodes.size() + 1;
         jobCodes.add(newCode);
         return newCode;
+    }
+
+    public void outputNotification(String msg){
+        System.out.println(msg);
     }
 
     public ArrayList<Integer> getJobCodes(){

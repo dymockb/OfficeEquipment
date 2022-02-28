@@ -12,7 +12,7 @@ import util.LeadingZeros;
  * @version 1.0
  */
 
-public abstract class OfficeMachine 
+public abstract class OfficeMachine implements ListenerInterface
 {
     
     /* 
@@ -25,16 +25,13 @@ public abstract class OfficeMachine
     protected boolean online;
     protected boolean error;
     protected Job job;
+    protected Listener listener; 
 
     public OfficeMachine(){
-        online = true;
+        online = false;
         error = false;
         job = null;
     }
-
-    //public static OfficeMachine blankMachine(){
-    //    return new BlankMachine();
-    //}
 
     protected String getType(){
         return machineType;
@@ -65,8 +62,24 @@ public abstract class OfficeMachine
         return machineType + LeadingZeros.convertInteger(machineCode);
     }
 
-    protected boolean isOnline(){
+    protected boolean getOnlineStatus(){
         return online;
+    }
+
+    protected void setOnlineStatus(boolean online){
+        
+        if(!this.online){
+            if(online){
+                notifyListener(getMachineString() + " is now online.");
+            }
+        } else {
+            if(!online){
+                notifyListener(getMachineString() + " is now offline.");
+            }
+        }
+
+        this.online = online;
+    
     }
 
     protected boolean acceptJob(Job job){
@@ -88,6 +101,18 @@ public abstract class OfficeMachine
 
     public String toString() {
         return "desc of office machine";
+    }
+
+    public void registerListener(Listener listener){
+        this.listener = listener;
+    }
+
+    public void notifyListener(String msg){
+        listener.receiveNotification(msg);
+    }
+
+    public void showStatus(){
+
     }
 
 }

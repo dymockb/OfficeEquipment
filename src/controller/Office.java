@@ -4,16 +4,20 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import model.Command;
+import util.Parser;
+import util.MachineTypes;
+
 import model.OfficeMachine;
 import model.OfficeManager;
+import model.Listener;
+
 import model.Printer;
 import model.Copier;
 import model.Scanner;
 import model.CoffeeMachine;
 import model.VendingMachine;
 
-import util.Parser;
-import util.MachineTypes;
+
 
 /**
  *  
@@ -36,7 +40,7 @@ public class Office
     private ArrayList<Integer> machineCodes;
     private boolean testingOn;
     private String testFile;
-        
+    private Listener listener;    
     /**
      * The main method: this is what happens first when the program is run.
      * It creates an Office object, then - with user prompts - adds machines to the Office and
@@ -164,6 +168,12 @@ public class Office
                     officeManager = new OfficeManager(machineInventory, parser);
                 } else {
                     officeManager = new OfficeManager(machineInventory);
+                }
+
+                listener = new Listener(officeManager);
+                
+                for(OfficeMachine om : machineInventory){
+                    om.registerListener(listener);                
                 }
 
                 officeManager.start();

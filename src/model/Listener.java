@@ -1,26 +1,17 @@
 package model;
 
-public class Printer extends OfficeMachine {
-		
+public class Listener  {
+	
+	private OfficeManager manager;
 	/**
-	 * Constructor for a Printer
+	 * Constructor for a Listener
 	 */
-	public Printer() {
-		super();
-		machineDesc = "Printer";
-		machineType = "PRT";
+	public Listener(OfficeManager manager) {
+		this.manager = manager;
 	}
 
-	public void processJob(){
-		if(this.job != null){
-			System.out.println("Job " + job.getJobString() + " printing...");
-			System.out.println(" - " + job.getJobDescription());
-			this.job = null;
-		} else {
-			System.out.println("Nothing to print.");
-		}
-
+	public void receiveNotification(String msg){
+		manager.outputNotification(msg);
 	}
-
 	
 }
