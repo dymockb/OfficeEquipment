@@ -1,6 +1,5 @@
 package model;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import util.Parser;
@@ -19,8 +18,9 @@ public class OfficeManager
     private ArrayList<Job> jobQueue;
     private String[] managerCommands;
     private ArrayList<Integer> jobCodes;
-    private boolean testingOn;
-    private String testFile;
+    //private boolean testingOn;
+
+    
     /**
      * 
      * @param 
@@ -32,18 +32,17 @@ public class OfficeManager
         jobQueue = new ArrayList<Job>();
         managerCommands = new String[] {"stop", "add-jobs", "process-jobs", "queue", "help"};
         jobCodes = new ArrayList<Integer>();
-        testingOn = false;
+        //testingOn = false;
     }
-
-    public OfficeManager(ArrayList<OfficeMachine> availableMachines, String testFile) throws FileNotFoundException
+    
+    public OfficeManager(ArrayList<OfficeMachine> availableMachines, Parser parser)
     {
         this.availableMachines = availableMachines;
-        this.testFile = testFile;
-        parser = new Parser(this.testFile);
+        this.parser = parser;
         jobQueue = new ArrayList<Job>();
         managerCommands = new String[] {"stop", "add-jobs", "process-jobs", "queue", "help"};
         jobCodes = new ArrayList<Integer>();
-        testingOn = true;
+        //testingOn = true;
 
     }
 
@@ -85,9 +84,7 @@ public class OfficeManager
                 addingJobs = processJobCommand(jobCommand);  
             }
             System.out.println("Finished adding jobs.  Enter a command:");
-            System.out.println(" - process-jobs:  Process the job queue.");
-            System.out.println(" - queue:  view the job queue.");
-            System.out.println(" - help: view the help menu.");  
+            System.out.println("( - help: view the help menu.)");  
 
         } else if (command.getCommandWord().equals("queue")){
 
@@ -98,12 +95,7 @@ public class OfficeManager
 
         } else if (command.getCommandWord().equals("process-jobs")){
 
-            //boolean processingJobs = true;
-            //while(processingJobs){
-    
-                processJobs(jobQueue);
-
-            //}
+            processJobs(jobQueue);
 
             System.out.println("** Finished processing jobs.");
             System.out.println("Type a command, or 'help':");            
@@ -123,10 +115,11 @@ public class OfficeManager
     public void processJobs(ArrayList<Job> jobQueue){
         
         if(jobQueue.size()>0){
+
             for(int j = 0; j < jobQueue.size(); j++){
-                //System.out.println(jobQueue.get(j).getJobString());
+
                 OfficeMachine om = findNextAvailableMachine(jobQueue.get(j));
-                //System.out.println(om.getMachineString());
+                
                 om.processJob();
                 if(om.getType().equals("SCN")){
                     OfficeMachine printer = findNextAvailableMachine(om.getJob());
@@ -138,12 +131,21 @@ public class OfficeManager
                     }
 
                 }
+
+            }
+
+            //flush jobQueue
+            for(int j = jobQueue.size()-1; j >=0 ; j--){
                 jobQueue.remove(j);
             }
+            System.out.println("Job queue cleared.");
+
         } else {
+
             System.out.println("** No jobs in queue.");
-            //processingJobs = false;
-        }  
+        
+        }
+
     }
 
     public OfficeMachine findNextAvailableMachine(Job job){
@@ -183,24 +185,21 @@ public class OfficeManager
                 }
             }
             if (machinesAvailable > 0){
-                Job job = Job.createInvisibleJob("PRT");
-                if(testingOn){
-                    try {
-                        job = Job.createTestJob(jobType, "OfficeTestA.txt", parser);
-                    } catch (FileNotFoundException e){
+                Job job = null;
+                //if(testingOn){
+                //    job = Job.createTestJob(jobType, parser); 
+                //} else {
+                //    job = Job.createJob(jobType);
+                //}
 
-                    } 
-                } else {
-                    System.out.println("got to here");
-                    job = Job.createJob(jobType);
-                }
-
+                job = Job.createJob(jobType, parser);
 
                 int jobCode = createJobCode(jobCodes);
                 job.setJobCode(jobCode);
                 
                 addToQueue(job);
                 return true;
+
             } else {
                 System.out.println("The office does not contain any machines able to process that job.");
                 return true;

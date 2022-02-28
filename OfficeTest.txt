@@ -1,3 +1,28 @@
 add PRT
+add SCN
+add CPY
+add CFE
+add VND
 start-manager
+add-jobs
+PRT
+123
+print1
+SCN
+123
+scan1
+CPY
+123
+copy1
+3
+CFE
+123
+coffee1
+VND
+321
+vend1
+done
+process-jobs
+queue
+stop
 quit

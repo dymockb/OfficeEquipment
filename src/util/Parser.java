@@ -28,6 +28,7 @@ public class Parser
     private CommandWords commandWords;
     private MachineTypes machineCodes;
     private Scanner reader;         // source of command input
+    private boolean testingOn;
 
     /**
      * Create a parser to read from the terminal window.
@@ -37,6 +38,7 @@ public class Parser
         commandWords = new CommandWords();
         machineCodes = new MachineTypes();
         reader = new Scanner(System.in);
+        testingOn = false;
     }
 
     /** */
@@ -46,6 +48,7 @@ public class Parser
         machineCodes = new MachineTypes();
         File file= new File(testFile);
         reader = new Scanner(file);
+        testingOn = true;
     }
 
 
@@ -61,7 +64,7 @@ public class Parser
         System.out.print("> ");     // print prompt
 
         inputLine = reader.nextLine();
-        System.out.println("Input: " + inputLine);
+        printInput(inputLine);
 
         // Find up to two words on the line.
         try (Scanner tokenizer = new Scanner(inputLine)){
@@ -97,7 +100,7 @@ public class Parser
         System.out.print("> ");     // print prompt
 
         inputLine = reader.nextLine();
-        System.out.println("Input: " + inputLine);
+        printInput(inputLine);
 
         // Find up to two words on the line.
         try (Scanner tokenizer = new Scanner(inputLine)){
@@ -132,7 +135,7 @@ public class Parser
         System.out.print("> ");     // print prompt
 
         inputLine = reader.nextLine();
-        System.out.println("Input: " + inputLine);
+        printInput(inputLine);
 
         // Find up to two words on the line.
         try (Scanner tokenizer = new Scanner(inputLine)){
@@ -157,6 +160,12 @@ public class Parser
         }
     }
 
+    private void printInput(String input){
+        if(testingOn){
+            System.out.println(input);
+        }
+    }
+
     public boolean checkManagerCommand(String aString, String[] managerCommands)
     {
         for(int i = 0; i < managerCommands.length; i++) {
@@ -172,7 +181,7 @@ public class Parser
         System.out.println("Who is the owner of the job? (Type your employee number)");
         System.out.print("> ");     // print prompt
         inputLine = reader.nextLine();
-        System.out.println("Input: " + inputLine);
+        printInput(inputLine);
         return Integer.parseInt(inputLine);
     }
 
@@ -182,7 +191,7 @@ public class Parser
         System.out.println("Please enter a job description");
         System.out.print("> ");     // print prompt
         inputLine = reader.nextLine();
-        System.out.println("Input: " + inputLine);
+        printInput(inputLine);
         return inputLine;
     }
 
@@ -191,7 +200,7 @@ public class Parser
         System.out.println("Please enter the number of Copies needed.");        
         System.out.print("> ");     // print prompt
         inputLine = reader.nextLine();
-        System.out.println("Input: " + inputLine);
+        printInput(inputLine);
         return Integer.parseInt(inputLine);
     }
 

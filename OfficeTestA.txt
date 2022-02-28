@@ -1,7 +1,3 @@
-add-jobs
-PRT
-123
-printJob1
-done
-process-jobs
-stop
+add PRT
+start-manager
+quit

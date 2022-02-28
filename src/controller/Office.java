@@ -150,11 +150,7 @@ public class Office
 
             if(machineInventory.size()>0){
                 if(testingOn){
-                    try {
-                        officeManager = new OfficeManager(machineInventory, "OfficeTestA.txt");
-                    } catch (FileNotFoundException e){
-
-                    }
+                    officeManager = new OfficeManager(machineInventory, parser);
                 } else {
                     officeManager = new OfficeManager(machineInventory);
                 }

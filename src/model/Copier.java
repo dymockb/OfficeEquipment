@@ -9,7 +9,6 @@ public class Copier extends OfficeMachine {
 		super();
 		machineDesc = "Copier";
 		machineType = "CPY";
-		//job = new CopierJob();
 	}
 
 	public void processJob(){
@@ -20,7 +19,6 @@ public class Copier extends OfficeMachine {
 			//https://stackoverflow.com/questions/65323916/java-fails-to-recognize-that-i-am-declaring-the-subclass-and-cannot-find-member
 			int noOfCopies = job.getNoOfCopies();
 			
-			//int noOfCopies = 3; 
 			int copiesDone = 1;
 			while(copiesDone <= noOfCopies){
 				System.out.println("Copy " + copiesDone + " of " + noOfCopies + ": " + job.getJobDescription());	
