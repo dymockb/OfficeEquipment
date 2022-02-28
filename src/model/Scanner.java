@@ -17,7 +17,9 @@ public class Scanner extends OfficeMachine {
 			
 			job.setJobOwner(machineCode);
 			job.setJobType("PRT");
-			System.out.println("Scan ready - job: " + job.getJobString());
+
+			System.out.println(" - " + job.getJobDescription());
+			System.out.println(" - Scan ready, converted to print job: " + job.getJobString());
 
 		} else {
 			System.out.println("Nothing to scan.");

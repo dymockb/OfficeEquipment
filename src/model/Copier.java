@@ -21,7 +21,7 @@ public class Copier extends OfficeMachine {
 			
 			int copiesDone = 1;
 			while(copiesDone <= noOfCopies){
-				System.out.println("Copy " + copiesDone + " of " + noOfCopies + ": " + job.getJobDescription());	
+				System.out.println(" - Copy " + copiesDone + " of " + noOfCopies + ": " + job.getJobDescription());	
 				copiesDone++;
 			}
 		

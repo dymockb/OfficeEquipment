@@ -95,6 +95,8 @@ public class OfficeManager
 
         } else if (command.getCommandWord().equals("process-jobs")){
 
+            System.out.println("** Processing jobs...");
+
             processJobs(jobQueue);
 
             System.out.println("** Finished processing jobs.");

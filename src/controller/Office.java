@@ -43,9 +43,20 @@ public class Office
      * optionally runs the office manager.
      */
     public static void main(String[] args) throws FileNotFoundException {
-    	//Office office = new Office();
-    	Office office = new Office("OfficeTest.txt");
-    	office.openForBusiness();
+    	
+        /** UnComment the appropriate line below */
+
+        /** Run this line to run the office via System input.*/
+       
+            //Office office = new Office();
+    	
+        /** Run this line to run the office via the OfficeTest.txt file.*/
+
+            Office office = new Office("OfficeTest.txt");
+    	
+
+        office.openForBusiness();
+    
     }
         
     /**
