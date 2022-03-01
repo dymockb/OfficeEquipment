@@ -1,0 +1,172 @@
+<diagram program="umletino" version="14.3.0"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>360</x><y>130</y><w>240</w><h>280</h></coordinates><panel_attributes>&lt;&lt;OfficeEquipment&gt;&gt;
+--
+Fields
++ online: boolean
++ errorState: boolean
++ jobs: ArrayList&lt;Job&gt;
++ currentJob: Job;
++ machineCode: String
++ machineNumber: int
+--
+Constructor
++ OfficeEquipment(machineCode)
+
+--
+Methods
++ acceptJob(): boolean
++ processJob();
++ getStatus()
++ resetState();</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>490</y><w>140</w><h>170</h></coordinates><panel_attributes>_object: Printer_
+--
+Fields
+
+--
+Constructor
+
+--
+Methods
+- processJob</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>150</x><y>490</y><w>140</w><h>170</h></coordinates><panel_attributes>_object: Copier_
+--
+Fields
+--
+Constructor
+
+--
+Methods
+- processJob();</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>440</x><y>90</y><w>100</w><h>30</h></coordinates><panel_attributes>/AbstractClass/
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>300</x><y>490</y><w>130</w><h>170</h></coordinates><panel_attributes>_object: Scanner_
+--
+Fields
+--
+Constructor
+
+--
+Methods
++ processJob();
++ clearJobs();</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>940</x><y>110</y><w>210</w><h>240</h></coordinates><panel_attributes>OfficeManager
+--
+Fields
++ activeJobs: ArrayList&lt;Job&gt;
++ availableMachines: 
+      ArrayList&lt;OfficeEquipment&gt;
+--
+Constructor
++ OfficeManager();
+--
+Methods
++ addJob();
++ assignJob();
++ processJobs();
++ clearCache();
++ start();</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1190</x><y>230</y><w>240</w><h>230</h></coordinates><panel_attributes>Job
+--
+Fields
++ jobNumber: int
++ jobDescription: String
++ jobOwner: String
+--
+Constructor
++ Job(String machineCode, String description, String jobOwner)
+
+--
+Methods
++ createJobCode();
++ getJobNumber: jobNumber;
++ getJobDescription: jobDescription
++ getJobCode: jobCode</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1460</x><y>230</y><w>240</w><h>230</h></coordinates><panel_attributes>CreateJobCode
+--
+Fields
++ jobCode: int
+--
+Constructor
++ CreateJobCode(ArrayList jobCodes)
+
+--
+Methods
++ createJobCode();
++ getJobNumber: jobNumber;
++ getJobDescription: jobDescription
++ getJobCode: jobCode</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1200</x><y>0</y><w>210</w><h>190</h></coordinates><panel_attributes>Parser
+--
+Fields
+
+--
+Constructor
+
+--
+Methods</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>30</x><y>80</y><w>280</w><h>200</h></coordinates><panel_attributes>OfficeOwner
+--
+Fields
+- monitoringTool: OfficeManager
+- allMachines: ArrayList&lt;Machine&gt;
+--
+Constructor
++ OfficeOwner();
+
+--
+Methods
++ addMachine();
++ removeMachine();
++ runOfficeManager();</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>30</x><y>300</y><w>280</w><h>160</h></coordinates><panel_attributes>MachineTypes
+--
+Fields
++ validMachineTypes: ArrayList&lt;String&gt;
+--
+Constructor
++ MachineTypes();
+--
+Methods
++ addMachineType();
++ getMachineTypes(): ArrayList&lt;String&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>440</x><y>490</y><w>130</w><h>170</h></coordinates><panel_attributes>_object: CoffeeMachine_
+--
+Fields
+--
+Constructor
+
+--
+Methods
++ processJob();
++ clearJobs();</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>590</x><y>490</y><w>140</w><h>170</h></coordinates><panel_attributes>_object: VendingMachine_
+--
+Fields
+--
+Constructor
+
+--
+Methods
++ processJob();
++ clearJobs();</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>740</x><y>490</y><w>140</w><h>170</h></coordinates><panel_attributes>_object: FoodProcessor_
+--
+Fields
+--
+Constructor
+
+--
+Methods
++ processJob();
++ clearJobs();</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1250</x><y>200</y><w>100</w><h>30</h></coordinates><panel_attributes>/AbstractClass/
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>340</x><y>10</y><w>360</w><h>30</h></coordinates><panel_attributes>THIS DIAGRAM IS INCOMPLETE &amp; REQUIRES CORRECTIONS</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1010</x><y>500</y><w>140</w><h>110</h></coordinates><panel_attributes>_object: StandardJob_
+--
+Fields
+--
+Constructor
+
+--
+Methods
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1180</x><y>500</y><w>140</w><h>110</h></coordinates><panel_attributes>_object: CopierJob_
+--
+Fields
+--
+Constructor
+
+--
+Methods
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1350</x><y>500</y><w>150</w><h>110</h></coordinates><panel_attributes>_object: FoodProcessorJob_
+--
+Fields
+--
+Constructor
+
+--
+Methods
+</panel_attributes><additional_attributes></additional_attributes></element></diagram>

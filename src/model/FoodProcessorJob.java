@@ -26,7 +26,6 @@ public class FoodProcessorJob extends Job
         this.jobType = jobType;
         this.owner = owner;
         this.description = description;
-        System.out.println("here");
         setTemperature();
     }
 
