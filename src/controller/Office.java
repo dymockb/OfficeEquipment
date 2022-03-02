@@ -24,7 +24,7 @@ import model.VendingMachine;
  *  
  *  This main class creates and initialises all the others: it creates 
  *  the office, creates the parser, populates the office with machines
- *  and starts the Office Manager.  
+ *  and starts the Office Manager.  DOWNCAST BRANCH 
  * 
  *  It also evaluates and executes the commands that the parser returns.
  * 
