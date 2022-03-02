@@ -16,9 +16,10 @@ public class FoodProcessor extends OfficeMachine {
 
 	public void processJob() throws TemperatureException {
 		if(this.job != null){
-			if(job.getTemperature() < lowerBound || job.getTemperature() > upperBound){
+			FoodProcessorJob foodJob = (FoodProcessorJob)job;
+			if(foodJob.getTemperature() < lowerBound || foodJob.getTemperature() > upperBound){
 				setErrorStatus(true);
-				throw new TemperatureException(this.machineCode, lowerBound, upperBound, job.getTemperature());
+				throw new TemperatureException(this.machineCode, lowerBound, upperBound, foodJob.getTemperature());
 			} else {
 				System.out.println("Job " + job.getJobString() + " blending breakfast...");
 				System.out.println(" - " + job.getJobDescription());

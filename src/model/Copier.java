@@ -17,7 +17,8 @@ public class Copier extends OfficeMachine {
 			System.out.println("Job " + job.getJobString() + " copying...");
 			
 			//https://stackoverflow.com/questions/65323916/java-fails-to-recognize-that-i-am-declaring-the-subclass-and-cannot-find-member
-			int noOfCopies = job.getNoOfCopies();
+			CopierJob copierJob = (CopierJob)job;
+			int noOfCopies = copierJob.getNoOfCopies();
 			
 			int copiesDone = 1;
 			while(copiesDone <= noOfCopies){

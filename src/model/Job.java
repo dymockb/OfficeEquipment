@@ -80,8 +80,5 @@ public abstract class Job
         return jobType + LeadingZeros.convertInteger(jobCode);
     }
 
-    public abstract int getNoOfCopies();
-
-    public abstract int getTemperature();
 }
 

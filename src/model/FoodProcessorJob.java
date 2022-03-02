@@ -47,9 +47,5 @@ public class FoodProcessorJob extends Job
         temperature = parser.setTemperature(); 
     }
 
-    public int getNoOfCopies(){
-        return -1;
-    }
-
 }
 

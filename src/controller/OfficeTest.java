@@ -23,9 +23,13 @@ public class OfficeTest {
     @Test
     void ListenerExceptionTest() {
         Office office = new Office();
+
+        //create a printer, set machine code and notifications array
     	OfficeMachine printer = office.createMachine("PRT");
         printer.setCode(office.createCode());
         printer.setNotifications();
+
+        //add printer to the office
         office.addToInventory(printer);
 
         //start the manager 
@@ -42,7 +46,7 @@ public class OfficeTest {
                         office.getInventory().get(0).notifyListener(notifications);
                     });       
 
-        //register the listener
+        //register the listener in the printer machine
         Listener listener = new Listener(manager);
         office.getInventory().get(0).registerListener(listener);
 
