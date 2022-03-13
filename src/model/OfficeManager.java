@@ -143,7 +143,7 @@ public class OfficeManager
                     OfficeMachine printer = findNextAvailableMachine(om.getJob());
                     if(printer != null){
                         try {
-                            om.processJob();
+                            printer.processJob();
                         } catch (TemperatureException e){
                             System.out.println(e);
                         }
